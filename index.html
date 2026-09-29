@@ -1,104 +1,232 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1">
-<title>PUBG VPN</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DEVIL VPN</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+margin:0;
+background:
+radial-gradient(circle at top,#321000 0,#090b10 42%,#050608 100%);
+color:#fff;
+font-family:Tahoma,sans-serif;
+min-height:100vh
 }
 
-body {
-  margin: 0;
-  background: #080d16;
-  color: white;
-  font-family: Tahoma, sans-serif;
+header{
+padding:28px 18px 22px;
+text-align:center;
+background:rgba(10,10,12,.85);
+border-bottom:1px solid #ff3b00;
+box-shadow:0 0 25px #ff3b0025
 }
 
-header {
-  padding: 25px 15px;
-  text-align: center;
-  background: linear-gradient(135deg, #111d31, #070a11);
-  border-bottom: 2px solid #ffb800;
+.logo{
+font-size:34px;
+font-weight:bold;
+color:#ff4b00;
+letter-spacing:2px;
+text-shadow:0 0 18px #ff3b0080
 }
 
-header h1 {
-  color: #ffb800;
-  margin: 0;
-  font-size: 30px;
+header p{
+margin:7px 0 0;
+color:#9ca3af;
+font-size:12px
 }
 
-header p {
-  color: #aab5c8;
-  font-size: 13px;
+.container{
+max-width:520px;
+margin:auto;
+padding:16px
 }
 
-.container {
-  max-width: 500px;
-  margin: auto;
-  padding: 18px;
+.card{
+background:rgba(17,20,27,.88);
+border:1px solid #292d36;
+border-radius:18px;
+padding:18px;
+margin-bottom:15px;
+box-shadow:0 8px 30px #0008
 }
 
-.card {
-  background: #111b2b;
-  border: 1px solid #263b55;
-  border-radius: 15px;
-  padding: 18px;
-  margin-bottom: 15px;
+.card h3{
+margin-top:0
 }
 
-.status {
-  color: #ffb800;
-  font-weight: bold;
+.status{
+color:#ff4b00;
+font-weight:bold
 }
 
-label {
-  display: block;
-  margin: 15px 0 8px;
-  color: #b7c5d8;
-  font-size: 13px;
+.info{
+display:flex;
+gap:8px;
+margin-top:12px
 }
 
-input, select {
-  width: 100%;
-  padding: 13px;
-  background: #08111e;
-  color: white;
-  border: 1px solid #334b68;
-  border-radius: 8px;
+.box{
+flex:1;
+background:#090c11;
+border:1px solid #292d36;
+border-radius:12px;
+padding:12px;
+text-align:center
 }
 
-button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 9px;
-  background: #ffb800;
-  color: #101010;
-  font-size: 15px;
-  font-weight: bold;
+.box small{
+display:block;
+color:#777f8c;
+margin-bottom:5px
 }
 
-button:active {
-  transform: scale(.98);
+label{
+display:block;
+margin:14px 0 7px;
+color:#aeb6c3;
+font-size:13px
 }
 
-.secondary {
-  background: #20334c;
-  color: white;
-  border: 1px solid #45617f;
+input,select,textarea{
+width:100%;
+padding:13px;
+background:#090c11;
+color:white;
+border:1px solid #303641;
+border-radius:10px;
+outline:none
 }
 
-footer {
-  text-align: center;
-  color: #718198;
-  font-size: 12px;
-  padding: 20px;
+input:focus,select:focus,textarea:focus{
+border-color:#ff4b00
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:13px;
+border:0;
+border-radius:11px;
+background:linear-gradient(135deg,#ff6500,#ff2600);
+color:white;
+font-size:15px;
+font-weight:bold;
+box-shadow:0 5px 18px #ff3b0030
+}
+
+button:active{
+transform:scale(.98)
+}
+
+.secondary{
+background:#171c24;
+border:1px solid #343b47;
+box-shadow:none
+}
+
+.danger{
+background:#261013;
+border:1px solid #572027;
+box-shadow:none
+}
+
+.hidden{
+display:none
+}
+
+.user{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px
+}
+
+.avatar{
+width:48px;
+height:48px;
+border-radius:50%;
+background:linear-gradient(135deg,#ff6500,#ff2600);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:21px
+}
+
+.userinfo{
+flex:1
+}
+
+.userinfo strong{
+display:block
+}
+
+.userinfo small{
+color:#7e8794
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 0;
+border-bottom:1px solid #242932
+}
+
+.row:last-child{
+border-bottom:0
+}
+
+.switch{
+width:46px;
+height:25px;
+background:#333;
+border-radius:20px;
+position:relative;
+cursor:pointer
+}
+
+.switch:after{
+content:"";
+width:19px;
+height:19px;
+background:white;
+border-radius:50%;
+position:absolute;
+top:3px;
+right:3px;
+transition:.2s
+}
+
+.switch.on{
+background:#ff4b00
+}
+
+.switch.on:after{
+right:24px
+}
+
+footer{
+text-align:center;
+color:#606875;
+font-size:11px;
+padding:20px
+}
+
+#toast{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:#171a20;
+border:1px solid #343a45;
+padding:12px 18px;
+border-radius:10px;
+display:none;
+z-index:99
 }
 </style>
 </head>
@@ -106,103 +234,366 @@ footer {
 <body>
 
 <header>
-  <h1>PUBG VPN</h1>
-  <p>پنل اختصاصی وایرگارد پابجی</p>
+<div class="logo">DEVIL VPN</div>
+<p>PUBG MOBILE • WIREGUARD PANEL</p>
 </header>
 
 <main class="container">
 
-  <section class="card">
-    <h3>وضعیت اتصال</h3>
-    <p class="status" id="status">
-      هنوز متصل نشده‌ای
-    </p>
-    <p>سرور: انتخاب نشده</p>
-    <p>پینگ: -- ms</p>
+<!-- ACCOUNT -->
+<section class="card" id="accountCard">
 
-    <button class="secondary"
-    onclick="alert('برای اتصال واقعی باید سرور WireGuard داشته باشی.')">
-      وضعیت اتصال
-    </button>
-  </section>
+<div id="loggedOut">
+<h3>👤 حساب کاربری</h3>
+<p style="color:#8d96a3;font-size:13px">
+برای استفاده از پنل، حساب نمایشی خودت را بساز.
+</p>
 
-  <section class="card">
-    <h3>ساخت کانفیگ</h3>
+<input id="username" placeholder="نام کاربری">
 
-    <label>نام کانفیگ</label>
-    <input id="configName"
-    placeholder="مثلاً PUBG-DE">
+<button onclick="login()">ساخت حساب / ورود</button>
+</div>
 
-    <label>انتخاب سرور</label>
-    <select id="server">
-      <option value="DE">آلمان 🇩🇪</option>
-      <option value="TR">ترکیه 🇹🇷</option>
-      <option value="NL">هلند 🇳🇱</option>
-    </select>
+<div id="loggedIn" class="hidden">
+<div class="user">
+<div class="avatar">👤</div>
 
-    <button onclick="createConfig()">
-      ساخت کانفیگ
-    </button>
+<div class="userinfo">
+<strong id="userName"></strong>
+<small>حساب کاربری</small>
+</div>
 
-    <p id="result"></p>
-  </section>
+<button class="danger" style="width:auto;margin:0;padding:9px 13px"
+onclick="logout()">خروج</button>
+</div>
+</div>
 
-  <section class="card">
-    <h3>کانفیگ من</h3>
+</section>
 
-    <textarea id="config"
-    rows="7"
-    style="width:100%;background:#08111e;color:#9de7ff;padding:10px;border-radius:8px"
-    placeholder="کانفیگ WireGuard اینجا قرار می‌گیرد"></textarea>
+<!-- CONNECTION -->
+<section class="card">
 
-    <button class="secondary"
-    onclick="copyConfig()">
-      کپی کانفیگ
-    </button>
-  </section>
+<h3>⚡ وضعیت اتصال</h3>
+
+<p class="status" id="status">
+● قطع است
+</p>
+
+<div class="info">
+
+<div class="box">
+<small>سرور</small>
+<b id="serverText">---</b>
+</div>
+
+<div class="box">
+<small>Ping</small>
+<b id="ping">-- ms</b>
+</div>
+
+</div>
+
+<button onclick="toggleConnection()" id="connectBtn">
+اتصال آزمایشی
+</button>
+
+</section>
+
+<!-- SERVER -->
+<section class="card">
+
+<h3>🌐 انتخاب سرور</h3>
+
+<label>سرور بازی</label>
+
+<select id="server" onchange="saveSettings()">
+<option value="DE">🇩🇪 آلمان</option>
+<option value="TR">🇹🇷 ترکیه</option>
+<option value="NL">🇳🇱 هلند</option>
+<option value="FR">🇫🇷 فرانسه</option>
+</select>
+
+</section>
+
+<!-- CONFIG -->
+<section class="card">
+
+<h3>🛠 ساخت کانفیگ</h3>
+
+<label>نام کانفیگ</label>
+
+<input id="configName" placeholder="مثلاً DEVIL-DE">
+
+<button onclick="createConfig()">
+ساخت کانفیگ نمایشی
+</button>
+
+<p id="result" style="color:#ff8a5b;font-size:13px"></p>
+
+<textarea id="config"
+rows="7"
+placeholder="کانفیگ WireGuard اینجا قرار می‌گیرد"></textarea>
+
+<button class="secondary" onclick="copyConfig()">
+📋 کپی کانفیگ
+</button>
+
+</section>
+
+<!-- SETTINGS -->
+<section class="card">
+
+<h3>⚙️ تنظیمات</h3>
+
+<div class="row">
+<span>ذخیره خودکار تنظیمات</span>
+<div class="switch on" id="saveSwitch"
+onclick="toggleSave()"></div>
+</div>
+
+<div class="row">
+<span>اتصال خودکار</span>
+<div class="switch" id="autoSwitch"
+onclick="toggleAuto()"></div>
+</div>
+
+<button class="secondary" onclick="resetSettings()">
+بازنشانی تنظیمات
+</button>
+
+</section>
 
 </main>
 
 <footer>
-  PUBG VPN | نسخه آزمایشی
+DEVIL VPN • DEMO VERSION<br>
+اتصال واقعی WireGuard هنوز فعال نیست
 </footer>
 
+<div id="toast"></div>
+
 <script>
-function createConfig() {
-  const name =
-    document.getElementById("configName").value;
 
-  const server =
-    document.getElementById("server").value;
+let connected=false;
 
-  if (!name.trim()) {
-    alert("نام کانفیگ را وارد کن");
-    return;
-  }
-
-  document.getElementById("result").innerText =
-    "کانفیگ " + name +
-    " برای سرور " + server +
-    " انتخاب شد. برای ساخت کانفیگ واقعی، سرور لازم است.";
+function toast(text){
+const t=document.getElementById("toast");
+t.innerText=text;
+t.style.display="block";
+setTimeout(()=>t.style.display="none",1800);
 }
 
-function copyConfig() {
-  const config =
-    document.getElementById("config");
+/* ACCOUNT */
 
-  if (!config.value.trim()) {
-    alert("اول کانفیگ واقعی را وارد کن");
-    return;
-  }
+function login(){
 
-  navigator.clipboard.writeText(config.value)
-    .then(() => alert("کانفیگ کپی شد"))
-    .catch(() => {
-      config.select();
-      document.execCommand("copy");
-      alert("کانفیگ کپی شد");
-    });
+const name=document.getElementById("username").value.trim();
+
+if(!name){
+toast("نام کاربری را وارد کن");
+return;
 }
+
+localStorage.setItem("devilUser",name);
+
+showUser();
+
+toast("حساب ساخته شد 🔥");
+}
+
+function showUser(){
+
+const name=localStorage.getItem("devilUser");
+
+if(name){
+
+document.getElementById("loggedOut").classList.add("hidden");
+document.getElementById("loggedIn").classList.remove("hidden");
+
+document.getElementById("userName").innerText=name;
+
+}else{
+
+document.getElementById("loggedOut").classList.remove("hidden");
+document.getElementById("loggedIn").classList.add("hidden");
+
+}
+}
+
+function logout(){
+
+localStorage.removeItem("devilUser");
+
+showUser();
+
+toast("از حساب خارج شدی");
+}
+
+/* CONNECTION */
+
+function toggleConnection(){
+
+if(!localStorage.getItem("devilUser")){
+toast("اول حساب بساز");
+return;
+}
+
+const server=document.getElementById("server");
+const text=server.options[server.selectedIndex].text;
+
+connected=!connected;
+
+if(connected){
+
+document.getElementById("status").innerText="● متصل آزمایشی";
+document.getElementById("status").style.color="#20e68a";
+
+document.getElementById("serverText").innerText=server.value;
+
+document.getElementById("ping").innerText=
+Math.floor(Math.random()*25+35)+" ms";
+
+document.getElementById("connectBtn").innerText="قطع اتصال";
+
+toast("اتصال آزمایشی برقرار شد");
+
+}else{
+
+document.getElementById("status").innerText="● قطع است";
+document.getElementById("status").style.color="#ff4b00";
+
+document.getElementById("serverText").innerText="---";
+document.getElementById("ping").innerText="-- ms";
+
+document.getElementById("connectBtn").innerText="اتصال آزمایشی";
+
+toast("اتصال قطع شد");
+}
+}
+
+/* CONFIG */
+
+function createConfig(){
+
+const name=document.getElementById("configName").value.trim();
+const server=document.getElementById("server").value;
+
+if(!name){
+toast("نام کانفیگ را وارد کن");
+return;
+}
+
+document.getElementById("config").value=
+"# DEVIL VPN DEMO\n"+
+"# Config: "+name+"\n"+
+"# Server: "+server+"\n\n"+
+"[Interface]\n"+
+"PrivateKey = DEMO_ONLY\n"+
+"Address = 10.0.0.2/32\n\n"+
+"[Peer]\n"+
+"PublicKey = DEMO_SERVER\n"+
+"Endpoint = demo.server:51820\n";
+
+document.getElementById("result").innerText=
+"کانفیگ نمایشی برای "+name+" ساخته شد.";
+
+toast("کانفیگ ساخته شد");
+}
+
+/* COPY */
+
+function copyConfig(){
+
+const config=document.getElementById("config");
+
+if(!config.value.trim()){
+toast("اول کانفیگ بساز");
+return;
+}
+
+navigator.clipboard.writeText(config.value)
+.then(()=>toast("کانفیگ کپی شد 📋"))
+.catch(()=>{
+config.select();
+document.execCommand("copy");
+toast("کپی شد");
+});
+}
+
+/* SETTINGS */
+
+function saveSettings(){
+
+if(localStorage.getItem("autoSave")!=="false"){
+
+localStorage.setItem(
+"devilServer",
+document.getElementById("server").value
+);
+
+}
+}
+
+function toggleSave(){
+
+const sw=document.getElementById("saveSwitch");
+
+sw.classList.toggle("on");
+
+localStorage.setItem(
+"autoSave",
+sw.classList.contains("on")
+);
+}
+
+function toggleAuto(){
+
+const sw=document.getElementById("autoSwitch");
+
+sw.classList.toggle("on");
+
+localStorage.setItem(
+"autoConnect",
+sw.classList.contains("on")
+);
+}
+
+function resetSettings(){
+
+localStorage.removeItem("devilServer");
+localStorage.removeItem("autoSave");
+localStorage.removeItem("autoConnect");
+
+document.getElementById("server").value="DE";
+
+document.getElementById("saveSwitch").classList.add("on");
+document.getElementById("autoSwitch").classList.remove("on");
+
+toast("تنظیمات بازنشانی شد");
+}
+
+/* LOAD */
+
+window.onload=function(){
+
+showUser();
+
+const savedServer=localStorage.getItem("devilServer");
+
+if(savedServer){
+document.getElementById("server").value=savedServer;
+}
+
+if(localStorage.getItem("autoSave")==="false"){
+document.getElementById("saveSwitch").classList.remove("on");
+}
+
+if(localStorage.getItem("autoConnect")==="true"){
+document.getElementById("autoSwitch").classList.add("on");
+}
+
+};
+
 </script>
 
 </body>
