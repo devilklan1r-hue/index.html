@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+<title>PUBG VPN</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #080d16;
+  color: white;
+  font-family: Tahoma, sans-serif;
+}
+
+header {
+  padding: 25px 15px;
+  text-align: center;
+  background: linear-gradient(135deg, #111d31, #070a11);
+  border-bottom: 2px solid #ffb800;
+}
+
+header h1 {
+  color: #ffb800;
+  margin: 0;
+  font-size: 30px;
+}
+
+header p {
+  color: #aab5c8;
+  font-size: 13px;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 18px;
+}
+
+.card {
+  background: #111b2b;
+  border: 1px solid #263b55;
+  border-radius: 15px;
+  padding: 18px;
+  margin-bottom: 15px;
+}
+
+.status {
+  color: #ffb800;
+  font-weight: bold;
+}
+
+label {
+  display: block;
+  margin: 15px 0 8px;
+  color: #b7c5d8;
+  font-size: 13px;
+}
+
+input, select {
+  width: 100%;
+  padding: 13px;
+  background: #08111e;
+  color: white;
+  border: 1px solid #334b68;
+  border-radius: 8px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 9px;
+  background: #ffb800;
+  color: #101010;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+button:active {
+  transform: scale(.98);
+}
+
+.secondary {
+  background: #20334c;
+  color: white;
+  border: 1px solid #45617f;
+}
+
+footer {
+  text-align: center;
+  color: #718198;
+  font-size: 12px;
+  padding: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>PUBG VPN</h1>
+  <p>پنل اختصاصی وایرگارد پابجی</p>
+</header>
+
+<main class="container">
+
+  <section class="card">
+    <h3>وضعیت اتصال</h3>
+    <p class="status" id="status">
+      هنوز متصل نشده‌ای
+    </p>
+    <p>سرور: انتخاب نشده</p>
+    <p>پینگ: -- ms</p>
+
+    <button class="secondary"
+    onclick="alert('برای اتصال واقعی باید سرور WireGuard داشته باشی.')">
+      وضعیت اتصال
+    </button>
+  </section>
+
+  <section class="card">
+    <h3>ساخت کانفیگ</h3>
+
+    <label>نام کانفیگ</label>
+    <input id="configName"
+    placeholder="مثلاً PUBG-DE">
+
+    <label>انتخاب سرور</label>
+    <select id="server">
+      <option value="DE">آلمان 🇩🇪</option>
+      <option value="TR">ترکیه 🇹🇷</option>
+      <option value="NL">هلند 🇳🇱</option>
+    </select>
+
+    <button onclick="createConfig()">
+      ساخت کانفیگ
+    </button>
+
+    <p id="result"></p>
+  </section>
+
+  <section class="card">
+    <h3>کانفیگ من</h3>
+
+    <textarea id="config"
+    rows="7"
+    style="width:100%;background:#08111e;color:#9de7ff;padding:10px;border-radius:8px"
+    placeholder="کانفیگ WireGuard اینجا قرار می‌گیرد"></textarea>
+
+    <button class="secondary"
+    onclick="copyConfig()">
+      کپی کانفیگ
+    </button>
+  </section>
+
+</main>
+
+<footer>
+  PUBG VPN | نسخه آزمایشی
+</footer>
+
+<script>
+function createConfig() {
+  const name =
+    document.getElementById("configName").value;
+
+  const server =
+    document.getElementById("server").value;
+
+  if (!name.trim()) {
+    alert("نام کانفیگ را وارد کن");
+    return;
+  }
+
+  document.getElementById("result").innerText =
+    "کانفیگ " + name +
+    " برای سرور " + server +
+    " انتخاب شد. برای ساخت کانفیگ واقعی، سرور لازم است.";
+}
+
+function copyConfig() {
+  const config =
+    document.getElementById("config");
+
+  if (!config.value.trim()) {
+    alert("اول کانفیگ واقعی را وارد کن");
+    return;
+  }
+
+  navigator.clipboard.writeText(config.value)
+    .then(() => alert("کانفیگ کپی شد"))
+    .catch(() => {
+      config.select();
+      document.execCommand("copy");
+      alert("کانفیگ کپی شد");
+    });
+}
+</script>
+
+</body>
+</html>
