@@ -1,493 +1,1303 @@
-/* =====================================================
-   DEVIL DNS - FIXED & FULLY OPTIMIZED JAVASCRIPT
-===================================================== */
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DEVIL VPN</title>
 
-const servers = {
-  DE: {
-    code: "DE",
-    name: "آلمان",
-    flag: "🇩🇪",
-    ping: "...",
-    endpoint: "demo-de.devil-dns.local:51820",
-    testUrl: "https://www.cloudflare.com/cdn-cgi/trace"
-  },
-  TR: {
-    code: "TR",
-    name: "ترکیه",
-    flag: "🇹🇷",
-    ping: "...",
-    endpoint: "demo-tr.devil-dns.local:51820",
-    testUrl: "https://www.cloudflare.com/cdn-cgi/trace"
-  },
-  NL: {
-    code: "NL",
-    name: "هلند",
-    flag: "🇳🇱",
-    ping: "...",
-    endpoint: "demo-nl.devil-dns.local:51820",
-    testUrl: "https://www.cloudflare.com/cdn-cgi/trace"
-  },
-  FR: {
-    code: "FR",
-    name: "فرانسه",
-    flag: "🇫🇷",
-    ping: "...",
-    endpoint: "demo-fr.devil-dns.local:51820",
-    testUrl: "https://www.cloudflare.com/cdn-cgi/trace"
-  }
-};
+<style>
+*{
+box-sizing:border-box;
+}
 
-let selectedServer = localStorage.getItem("devilServer") || "DE";
-let connected = false;
+body{
+margin:0;
+padding-bottom:85px;
+background:
+radial-gradient(circle at top,#3a1005 0,#0a0b0f 42%,#040507 100%);
+color:#fff;
+font-family:Tahoma,Arial,sans-serif;
+min-height:100vh;
+}
 
+header{
+padding:24px 15px;
+text-align:center;
+background:#090a0ded;
+border-bottom:1px solid #ff4b16;
+}
+
+.logo{
+font-size:30px;
+font-weight:900;
+color:#ff5317;
+text-shadow:0 0 20px #ff3b0060;
+}
+
+.logo span{
+color:white;
+}
+
+.subtitle{
+font-size:11px;
+color:#7e8794;
+margin-top:7px;
+}
+
+.container{
+width:min(550px,100%);
+margin:auto;
+padding:16px;
+}
+
+/* صفحات */
+
+.page{
+display:none;
+animation:fade .2s ease;
+}
+
+.page.active{
+display:block;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(5px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* کارت */
+
+.card{
+background:#111419ed;
+border:1px solid #292e38;
+border-radius:20px;
+padding:18px;
+margin-bottom:15px;
+box-shadow:0 12px 35px #0009;
+}
+
+.hero{
+padding:25px 20px;
+}
+
+.eyebrow{
+font-size:10px;
+color:#ff5a20;
+font-weight:bold;
+letter-spacing:2px;
+}
+
+h1{
+font-size:27px;
+margin:12px 0;
+}
+
+h2{
+font-size:17px;
+margin-top:0;
+}
+
+p{
+color:#9099a7;
+font-size:13px;
+line-height:1.8;
+}
+
+/* دکمه */
+
+.btn{
+width:100%;
+padding:14px;
+border:0;
+border-radius:12px;
+margin-top:13px;
+background:linear-gradient(135deg,#ff681e,#ef260d);
+color:white;
+font-size:14px;
+font-weight:bold;
+}
+
+.secondary{
+background:#191f28;
+border:1px solid #363e4a;
+}
+
+/* وضعیت */
+
+.status{
+display:flex;
+align-items:center;
+gap:8px;
+color:#ff6126;
+font-weight:bold;
+}
+
+.statusDot{
+width:9px;
+height:9px;
+border-radius:50%;
+background:#ff6126;
+box-shadow:0 0 12px #ff6126;
+}
+
+.stats{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:15px;
+}
+
+.stat{
+background:#090c11;
+border:1px solid #282e38;
+border-radius:12px;
+padding:13px;
+text-align:center;
+}
+
+.stat small{
+display:block;
+color:#737d8b;
+font-size:11px;
+margin-bottom:7px;
+}
+
+/* فرم */
+
+label{
+display:block;
+color:#aeb6c3;
+font-size:12px;
+margin:14px 0 7px;
+}
+
+input,select,textarea{
+width:100%;
+padding:13px;
+background:#080b10;
+border:1px solid #303744;
+border-radius:11px;
+color:white;
+outline:none;
+}
+
+textarea{
+resize:vertical;
+}
+
+/* خانه */
+
+.homeGrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.homeBox{
+background:#10151c;
+border:1px solid #292f39;
+border-radius:16px;
+padding:17px;
+cursor:pointer;
+}
+
+.homeBox b{
+display:block;
+margin-bottom:9px;
+}
+
+.homeBox small{
+color:#7d8795;
+font-size:11px;
+}
+
+/* سرورها */
+
+.server{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#090c11;
+border:1px solid #292f39;
+border-radius:12px;
+padding:14px;
+margin-top:9px;
+cursor:pointer;
+}
+
+.server:hover{
+border-color:#ff4b16;
+}
+
+.server small{
+color:#7d8795;
+}
+
+/* فایل */
+
+.file{
+background:#090c11;
+border:1px solid #292f39;
+border-radius:12px;
+padding:14px;
+margin-bottom:9px;
+}
+
+/* تنظیمات */
+
+.setting{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:14px 0;
+border-bottom:1px solid #272c35;
+font-size:13px;
+}
+
+.switch{
+width:45px;
+height:24px;
+background:#303640;
+border-radius:20px;
+position:relative;
+cursor:pointer;
+}
+
+.switch::after{
+content:"";
+position:absolute;
+width:18px;
+height:18px;
+background:white;
+border-radius:50%;
+top:3px;
+right:3px;
+transition:.2s;
+}
+
+.switch.on{
+background:#ff4b16;
+}
+
+.switch.on::after{
+right:24px;
+}
+
+/* منوی پایین */
+
+.bottomNav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:70px;
+background:#090a0df7;
+border-top:1px solid #292e36;
+display:flex;
+z-index:100;
+}
+
+.bottomNav button{
+flex:1;
+border:0;
+background:none;
+color:#707987;
+font-size:19px;
+padding:7px 2px;
+}
+
+.bottomNav span{
+display:block;
+font-size:9px;
+margin-top:4px;
+}
+
+.bottomNav button.active{
+color:#ff571b;
+}
+
+/* پیام */
+
+#toast{
+position:fixed;
+bottom:85px;
+left:50%;
+transform:translateX(-50%);
+background:#181c23;
+border:1px solid #363d48;
+padding:12px 18px;
+border-radius:10px;
+display:none;
+z-index:200;
+font-size:12px;
+}
+
+/* موبایل */
+
+@media(max-width:390px){
+
+.homeGrid{
+grid-template-columns:1fr;
+}
+
+.logo{
+font-size:26px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+DEVIL<span>・</span>VPN
+</div>
+
+<div class="subtitle">
+PUBG MOBILE • GAMING PANEL
+</div>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- ================= HOME ================= -->
+
+<section class="page active" id="home">
+
+<div class="card hero">
+
+<div class="eyebrow">
+PRIVATE GAMING NETWORK
+</div>
+
+<h1>
+پنل اختصاصی پابجی
+</h1>
+
+<p>
+مدیریت VPN، سرورها و کانفیگ‌های WireGuard در یک پنل مخصوص موبایل.
+</p>
+
+<button class="btn"
+onclick="openPage('vpn')">
+🎮 ورود به PUBG VPN
+</button>
+
+</div>
+
+
+<div class="homeGrid">
+
+<div class="homeBox"
+onclick="openPage('vpn')">
+
+<b>🎮 PUBG VPN</b>
+
+<small>
+سرورها و اتصال
+</small>
+
+</div>
+
+
+<div class="homeBox"
+onclick="openPage('configs')">
+
+<b>📁 کانفیگ‌های من</b>
+
+<small>
+فایل‌های CONF
+</small>
+
+</div>
+
+
+<div class="homeBox"
+onclick="openPage('account')">
+
+<b>👤 حساب کاربری</b>
+
+<small>
+پروفایل و ورود
+</small>
+
+</div>
+
+
+<div class="homeBox"
+onclick="openPage('settings')">
+
+<b>⚙️ تنظیمات</b>
+
+<small>
+تنظیمات پنل
+</small>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= VPN ================= -->
+
+<section class="page" id="vpn">
+
+<div class="card">
+
+<h2>
+⚡ وضعیت اتصال
+</h2>
+
+<div class="status">
+
+<div class="statusDot" id="statusDot"></div>
+
+<span id="statusText">
+قطع است
+</span>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+
+<small>
+سرور
+</small>
+
+<b id="currentServer">
+---
+</b>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+PING
+</small>
+
+<b id="ping">
+-- ms
+</b>
+
+</div>
+
+</div>
+
+
+<button class="btn"
+id="connectButton"
+onclick="connectVPN()">
+
+اتصال آزمایشی
+
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+🌐 انتخاب سرور
+</h2>
+
+<div class="server"
+onclick="selectServer('DE','🇩🇪 آلمان')">
+
+<div>
+🇩🇪 آلمان
+</div>
+
+<small>
+DE
+</small>
+
+</div>
+
+
+<div class="server"
+onclick="selectServer('TR','🇹🇷 ترکیه')">
+
+<div>
+🇹🇷 ترکیه
+</div>
+
+<small>
+TR
+</small>
+
+</div>
+
+
+<div class="server"
+onclick="selectServer('NL','🇳🇱 هلند')">
+
+<div>
+🇳🇱 هلند
+</div>
+
+<small>
+NL
+</small>
+
+</div>
+
+
+<div class="server"
+onclick="selectServer('FR','🇫🇷 فرانسه')">
+
+<div>
+🇫🇷 فرانسه
+</div>
+
+<small>
+FR
+</small>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+📥 ساخت فایل CONF
+</h2>
+
+<label>
+نام کانفیگ
+</label>
+
+<input
+id="configName"
+placeholder="مثلاً DEVIL-DE"
+>
+
+
+<button class="btn"
+onclick="downloadConfig()">
+
+دانلود فایل .CONF
+
+</button>
+
+<p>
+فایل فعلی آزمایشی است. برای اتصال واقعی WireGuard باید سرور و کلیدهای واقعی داشته باشی.
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= CONFIGS ================= -->
+
+<section class="page" id="configs">
+
+<div class="card">
+
+<h2>
+📁 کانفیگ‌های من
+</h2>
+
+<div id="configList">
+
+<p>
+هنوز کانفیگی دانلود نکرده‌ای.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= ACCOUNT ================= -->
+
+<section class="page" id="account">
+
+<div class="card">
+
+<h2>
+👤 حساب کاربری
+</h2>
+
+<div id="accountContent">
+
+<label>
+نام کاربری
+</label>
+
+<input
+id="username"
+placeholder="نام کاربری خودت"
+>
+
+<button
+class="btn"
+onclick="createAccount()">
+
+ساخت حساب نمایشی
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= SETTINGS ================= -->
+
+<section class="page" id="settings">
+
+<div class="card">
+
+<h2>
+⚙️ تنظیمات
+</h2>
+
+
+<div class="setting">
+
+<span>
+ذخیره خودکار
+</span>
+
+<div
+class="switch on"
+id="saveSwitch"
+onclick="toggleSwitch('saveSwitch')">
+</div>
+
+</div>
+
+
+<div class="setting">
+
+<span>
+اتصال خودکار
+</span>
+
+<div
+class="switch"
+id="autoSwitch"
+onclick="toggleSwitch('autoSwitch')">
+</div>
+
+</div>
+
+
+<button
+class="btn secondary"
+onclick="resetSettings()">
+
+بازنشانی تنظیمات
+
+</button>
+
+</div>
+
+</section>
+
+
+</div>
+
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav class="bottomNav">
+
+<button
+class="active"
+onclick="openPage('home',this)">
+
+⌂
+<span>
+خانه
+</span>
+
+</button>
+
+
+<button
+onclick="openPage('vpn',this)">
+
+🎮
+<span>
+VPN
+</span>
+
+</button>
+
+
+<button
+onclick="openPage('configs',this)">
+
+📁
+<span>
+فایل‌ها
+</span>
+
+</button>
+
+
+<button
+onclick="openPage('account',this)">
+
+👤
+<span>
+حساب
+</span>
+
+</button>
+
+
+<button
+onclick="openPage('settings',this)">
+
+⚙️
+<span>
+تنظیمات
+</span>
+
+</button>
+
+</nav>
+
+
+<div id="toast"></div>
+
+
+
+<script>
 
 /* ================= NAVIGATION ================= */
 
-function openPage(page, button) {
-  document.querySelectorAll(".page").forEach(p => {
-    p.classList.remove("active");
-  });
+function openPage(page,button){
 
-  const target = document.getElementById(page);
-  if (target) {
-    target.classList.add("active");
-  }
+document
+.querySelectorAll(".page")
+.forEach(p=>{
+p.classList.remove("active");
+});
 
-  document.querySelectorAll(".bottomNav button").forEach(b => {
-    b.classList.remove("active");
-  });
+document
+.getElementById(page)
+.classList.add("active");
 
-  if (button) {
-    button.classList.add("active");
-  } else {
-    const pages = ["home", "wireguard", "checker", "configs", "account", "settings"];
-    const index = pages.indexOf(page);
-    const buttons = document.querySelectorAll(".bottomNav button");
 
-    if (index >= 0 && buttons[index]) {
-      buttons[index].classList.add("active");
-    }
-  }
+document
+.querySelectorAll(".bottomNav button")
+.forEach(b=>{
+b.classList.remove("active");
+});
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
+
+if(button){
+button.classList.add("active");
+}else{
+
+const buttons=
+document.querySelectorAll(".bottomNav button");
+
+const pages=
+["home","vpn","configs","account","settings"];
+
+const index=
+pages.indexOf(page);
+
+if(buttons[index]){
+buttons[index].classList.add("active");
 }
+
+}
+
+window.scrollTo(0,0);
+
+}
+
 
 
 /* ================= TOAST ================= */
 
-function toast(message) {
-  const box = document.getElementById("toast");
-  if (!box) return;
+function toast(message){
 
-  box.innerText = message;
-  box.style.display = "block";
+const box=
+document.getElementById("toast");
 
-  clearTimeout(window.toastTimer);
-  window.toastTimer = setTimeout(() => {
-    box.style.display = "none";
-  }, 2200);
+box.innerText=message;
+
+box.style.display="block";
+
+setTimeout(()=>{
+box.style.display="none";
+},1800);
+
 }
 
 
-/* ================= REAL PING TESTER ================= */
 
-async function measurePing(serverCode) {
-  const server = servers[serverCode];
-  if (!server) return;
+/* ================= SERVER ================= */
 
-  const startTime = performance.now();
-  try {
-    await fetch(server.testUrl, {
-      method: "HEAD",
-      mode: "no-cors",
-      cache: "no-store"
-    });
-    const duration = Math.round(performance.now() - startTime);
-    servers[serverCode].ping = duration;
-  } catch (e) {
-    // اگر به دلیل خطای شبکه یا CORS ارتباط برقرار نشد، یک پینگ تخمینی مناسب در نظر گرفته می‌شود
-    servers[serverCode].ping = Math.floor(Math.random() * 40) + 30;
-  }
-}
+let selectedServer=
+localStorage.getItem("devilServer") || "DE";
 
-async function checkAllPings() {
-  for (const code of Object.keys(servers)) {
-    await measurePing(code);
-  }
-  renderServers();
-}
+let selectedServerName=
+localStorage.getItem("devilServerName") || "🇩🇪 آلمان";
 
 
-/* ================= SERVERS ================= */
+function selectServer(code,name){
 
-function renderServers() {
-  const list = document.getElementById("serverList");
-  if (!list) return;
+selectedServer=code;
 
-  list.innerHTML = "";
+selectedServerName=name;
 
-  Object.values(servers).forEach(server => {
-    const div = document.createElement("div");
-    div.className = "server " + (selectedServer === server.code ? "selected" : "");
+localStorage.setItem(
+"devilServer",
+code
+);
 
-    div.innerHTML = `
-      <div class="serverLeft">
-        <div class="flag">${server.flag}</div>
-        <div>
-          <div class="serverName">${server.name}</div>
-          <div class="serverMeta">${server.code} • ${server.endpoint}</div>
-        </div>
-      </div>
-      <div class="serverPing">
-        ${typeof server.ping === 'number' ? server.ping + ' ms' : server.ping}
-      </div>
-    `;
+localStorage.setItem(
+"devilServerName",
+name
+);
 
-    div.onclick = () => selectServer(server.code);
-    list.appendChild(div);
-  });
+document.getElementById(
+"currentServer"
+).innerText=code;
 
-  updateServerInfo();
-}
+toast(
+"سرور "+name+" انتخاب شد"
+);
 
-function selectServer(code) {
-  if (!servers[code]) return;
-  selectedServer = code;
-  localStorage.setItem("devilServer", selectedServer);
-  renderServers();
-  toast(`سرور ${servers[code].name} انتخاب شد`);
-  updateAccount();
-}
-
-function updateServerInfo() {
-  const server = servers[selectedServer];
-  if (!server) return;
-
-  const currentServer = document.getElementById("currentServer");
-  const ping = document.getElementById("ping");
-
-  if (currentServer) {
-    currentServer.innerText = server.code;
-  }
-  if (ping) {
-    ping.innerText = typeof server.ping === 'number' ? server.ping + " ms" : server.ping;
-  }
 }
 
 
-/* ================= VPN DEMO ================= */
 
-function connectVPN() {
-  const button = document.getElementById("connectButton");
-  const circle = document.getElementById("connectionCircle");
-  const dot = document.getElementById("statusDot");
-  const status = document.getElementById("statusText");
+/* ================= VPN ================= */
 
-  if (!button || !circle || !dot || !status) return;
+let connected=false;
 
-  if (connected) {
-    connected = false;
-    circle.classList.remove("active");
-    dot.style.background = "var(--red)";
-    dot.style.boxShadow = "0 0 12px var(--red)";
-    status.innerText = "قطع است";
-    button.innerText = "اتصال آزمایشی";
-    toast("اتصال قطع شد");
-    return;
-  }
 
-  button.disabled = true;
-  button.innerText = "در حال اتصال...";
-  status.innerText = "در حال اتصال";
+function connectVPN(){
 
-  setTimeout(() => {
-    connected = true;
-    circle.classList.add("active");
-    dot.style.background = "var(--green)";
-    dot.style.boxShadow = "0 0 12px var(--green)";
-    status.innerText = "متصل است";
-    button.disabled = false;
-    button.innerText = "قطع اتصال";
-    toast(`اتصال دمو به ${servers[selectedServer].name} برقرار شد`);
-  }, 1200);
+if(!selectedServer){
+
+toast("اول سرور انتخاب کن");
+
+return;
+
 }
 
 
-/* ================= CONFIG MANAGEMENT ================= */
+connected=!connected;
 
-function getConfigs() {
-  try {
-    return JSON.parse(localStorage.getItem("devilConfigs") || "[]");
-  } catch (e) {
-    return [];
-  }
+
+if(connected){
+
+document.getElementById(
+"statusText"
+).innerText=
+"متصل آزمایشی";
+
+
+document.getElementById(
+"statusDot"
+).style.background=
+"#19e68b";
+
+
+document.getElementById(
+"statusDot"
+).style.boxShadow=
+"0 0 12px #19e68b";
+
+
+document.getElementById(
+"currentServer"
+).innerText=
+selectedServer;
+
+
+document.getElementById(
+"ping"
+).innerText=
+(35+Math.floor(
+Math.random()*25
+))+" ms";
+
+
+document.getElementById(
+"connectButton"
+).innerText=
+"قطع اتصال";
+
+
+toast(
+"اتصال آزمایشی برقرار شد"
+);
+
+}else{
+
+location.reload();
+
 }
 
-function saveConfigs(configs) {
-  localStorage.setItem("devilConfigs", JSON.stringify(configs));
 }
 
-function getSelectedDNS() {
-  const dns = document.getElementById("dnsSelect");
-  return dns ? dns.value : "1.1.1.1";
+
+
+/* ================= CONF FILE ================= */
+
+function downloadConfig(){
+
+let name=
+document
+.getElementById("configName")
+.value
+.trim();
+
+
+if(!name){
+
+name=
+"DEVIL-"+selectedServer;
+
 }
 
-function downloadConfig() {
-  const input = document.getElementById("configName");
-  if (!input) return;
 
-  let name = input.value.trim();
-  if (!name) {
-    name = `DEVIL-${selectedServer}`;
-  }
+const config=
+`# DEVIL VPN
+# PUBG MOBILE
+# DEMO CONFIG
 
-  name = name.replace(/[^a-zA-Z0-9_\-]/g, "_");
-  const server = servers[selectedServer];
-
-  const config = `[Interface]
-PrivateKey = YOUR_PRIVATE_KEY
+[Interface]
+PrivateKey = DEMO_ONLY
 Address = 10.0.0.2/32
-DNS = ${getSelectedDNS()}
+DNS = 1.1.1.1
 
 [Peer]
-PublicKey = DEMO_PUBLIC_KEY
-AllowedIPs = 0.0.0.0/0, ::/0
-Endpoint = ${server.endpoint}
-PersistentKeepalive = 25
+PublicKey = DEMO_SERVER
+AllowedIPs = 0.0.0.0/0
+Endpoint = demo.server:51820
 `;
 
-  const blob = new Blob([config], { type: "application/octet-stream" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
 
-  a.href = url;
-  a.download = name + ".conf";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
+const blob=
+new Blob(
+[config],
+{type:"text/plain"}
+);
 
-  const configs = getConfigs();
-  configs.unshift({
-    name: name,
-    server: server.code,
-    country: server.name,
-    date: new Date().toLocaleString("fa-IR")
-  });
 
-  saveConfigs(configs);
-  renderConfigs();
-  updateAccount();
-  toast("فایل CONF ساخته شد");
-}
+const url=
+URL.createObjectURL(blob);
 
-function renderConfigs() {
-  const list = document.getElementById("configList");
-  if (!list) return;
 
-  const configs = getConfigs();
-  if (!configs.length) {
-    list.innerHTML = `<div class="empty">هنوز هیچ کانفیگی ساخته نشده است.</div>`;
-    return;
-  }
+const link=
+document.createElement("a");
 
-  list.innerHTML = "";
-  configs.forEach((config, index) => {
-    const div = document.createElement("div");
-    div.className = "file";
-    div.innerHTML = `
-      <div class="fileTitle">📄 ${escapeHTML(config.name)}.conf</div>
-      <div class="fileMeta">🌍 ${escapeHTML(config.country)} • ${escapeHTML(config.server)}<br>🕒 ${escapeHTML(config.date)}</div>
-      <button class="btn secondary smallBtn" onclick="deleteConfig(${index})">حذف</button>
-    `;
-    list.appendChild(div);
-  });
-}
 
-function deleteConfig(index) {
-  const configs = getConfigs();
-  if (index < 0 || index >= configs.length) return;
+link.href=url;
 
-  configs.splice(index, 1);
-  saveConfigs(configs);
-  renderConfigs();
-  updateAccount();
-  toast("کانفیگ حذف شد");
-}
 
-function clearConfigs() {
-  const configs = getConfigs();
-  if (!configs.length) {
-    toast("تاریخچه‌ای وجود ندارد");
-    return;
-  }
+link.download=
+name.replace(
+/[^a-zA-Z0-9_-]/g,
+"_"
+)+".conf";
 
-  if (!confirm("آیا تاریخچه کانفیگ‌ها پاک شود؟")) return;
 
-  localStorage.removeItem("devilConfigs");
-  renderConfigs();
-  updateAccount();
-  toast("تاریخچه پاک شد");
+link.click();
+
+
+URL.revokeObjectURL(url);
+
+
+/* ذخیره لیست */
+
+let files=
+JSON.parse(
+localStorage.getItem(
+"devilConfigs"
+) || "[]"
+);
+
+
+files.unshift({
+name:name,
+server:selectedServer,
+date:new Date()
+.toLocaleDateString("fa-IR")
+});
+
+
+localStorage.setItem(
+"devilConfigs",
+JSON.stringify(files)
+);
+
+
+loadConfigs();
+
+
+toast(
+"فایل .conf دانلود شد"
+);
+
 }
 
 
-/* ================= IP CHECKER ================= */
 
-async function checkIP() {
-  const input = document.getElementById("ipInput");
-  const scan = document.getElementById("scanBox");
-  const result = document.getElementById("ipResult");
+/* ================= CONFIG LIST ================= */
 
-  if (!input || !scan || !result) return;
+function loadConfigs(){
 
-  let ip = input.value.trim();
-  if (!ip) {
-    toast("یک IP وارد کن");
-    input.focus();
-    return;
-  }
+const box=
+document.getElementById(
+"configList"
+);
 
-  scan.classList.add("active");
-  result.classList.remove("show");
-  const start = performance.now();
 
-  try {
-    const response = await fetch("https://ipapi.co/" + encodeURIComponent(ip) + "/json/");
-    if (!response.ok) throw new Error("خطا در دریافت اطلاعات");
+let files=
+JSON.parse(
+localStorage.getItem(
+"devilConfigs"
+) || "[]"
+);
 
-    const data = await response.json();
-    const elapsed = Math.round(performance.now() - start);
 
-    setText("ipStatus", "بررسی شد");
-    setText("ipAddress", ip);
-    setText("ipType", ip.includes(":") ? "IPv6" : "IPv4");
-    setText("ipCountry", data.country_name || "---");
-    setText("ipCity", data.city || "---");
-    setText("ipISP", data.org || "---");
-    setText("ipASN", data.asn || "---");
-    setText("ipResponse", elapsed + " ms");
+if(!files.length){
 
-    result.classList.add("show");
-    toast("بررسی IP انجام شد");
-  } catch (error) {
-    const elapsed = Math.round(performance.now() - start);
-    setText("ipStatus", "شناسایی اولیه");
-    setText("ipAddress", ip);
-    setText("ipType", ip.includes(":") ? "IPv6" : "IPv4");
-    setText("ipCountry", "آفلاین / نامشخص");
-    setText("ipResponse", elapsed + " ms");
-    result.classList.add("show");
-    toast("اطلاعات آنلاین IP در دسترس نبود");
-  } finally {
-    scan.classList.remove("active");
-  }
+box.innerHTML=
+"<p>هنوز کانفیگی دانلود نکرده‌ای.</p>";
+
+return;
+
 }
 
-function clearIPResult() {
-  const result = document.getElementById("ipResult");
-  const input = document.getElementById("ipInput");
 
-  if (result) result.classList.remove("show");
-  if (input) {
-    input.value = "";
-    input.focus();
-  }
-  toast("نتیجه پاک شد");
+box.innerHTML=
+files.map(file=>`
+
+<div class="file">
+
+📄 <b>
+${file.name}.conf
+</b>
+
+<br>
+
+<small style="color:#788290">
+
+سرور:
+${file.server}
+•
+${file.date}
+
+</small>
+
+</div>
+
+`).join("");
+
 }
+
+
+
+/* ================= ACCOUNT ================= */
+
+function createAccount(){
+
+const input=
+document.getElementById(
+"username"
+);
+
+const name=
+input.value.trim();
+
+
+if(!name){
+
+toast(
+"نام کاربری را وارد کن"
+);
+
+return;
+
+}
+
+
+localStorage.setItem(
+"devilUser",
+name
+);
+
+
+loadAccount();
+
+
+toast(
+"حساب نمایشی ساخته شد"
+);
+
+}
+
+
+function loadAccount(){
+
+const name=
+localStorage.getItem(
+"devilUser"
+);
+
+
+if(!name)return;
+
+
+document.getElementById(
+"accountContent"
+).innerHTML=`
+
+<div class="file">
+
+👤
+
+<b>
+${name}
+</b>
+
+<p>
+حساب نمایشی روی همین دستگاه ذخیره شده است.
+</p>
+
+<button
+class="btn secondary"
+onclick="logout()">
+
+خروج از حساب
+
+</button>
+
+</div>
+
+`;
+
+}
+
+
+function logout(){
+
+localStorage.removeItem(
+"devilUser"
+);
+
+location.reload();
+
+}
+
 
 
 /* ================= SETTINGS ================= */
 
-function toggleSwitch(id) {
-  const element = document.getElementById(id);
-  if (!element) return;
+function toggleSwitch(id){
 
-  element.classList.toggle("on");
-  const value = element.classList.contains("on");
-  localStorage.setItem("switch_" + id, value ? "1" : "0");
-  toast(value ? "فعال شد" : "غیرفعال شد");
-}
+const element=
+document.getElementById(id);
 
-function loadSwitches() {
-  ["saveSwitch", "notifySwitch", "autoSwitch", "compactSwitch"].forEach(id => {
-    const element = document.getElementById(id);
-    if (!element) return;
-    const saved = localStorage.getItem("switch_" + id);
-    if (saved !== null) {
-      element.classList.toggle("on", saved === "1");
-    }
-  });
-}
+element.classList.toggle("on");
 
-function resetSettings() {
-  if (!confirm("تنظیمات پنل به حالت اولیه برگردد؟")) return;
+localStorage.setItem(
+id,
+element.classList.contains("on")
+);
 
-  localStorage.removeItem("devilServer");
-  ["saveSwitch", "notifySwitch", "autoSwitch", "compactSwitch"].forEach(id => {
-    localStorage.removeItem("switch_" + id);
-  });
-
-  selectedServer = "DE";
-  loadSwitches();
-  renderServers();
-  toast("تنظیمات بازنشانی شد");
 }
 
 
-/* ================= ACCOUNT & HELPERS ================= */
+function resetSettings(){
 
-function updateAccount() {
-  const configs = getConfigs();
-  const count = document.getElementById("accountConfigCount");
-  const server = document.getElementById("accountServer");
+localStorage.removeItem(
+"devilServer"
+);
 
-  if (count) count.innerText = configs.length;
-  if (server) server.innerText = selectedServer;
+localStorage.removeItem(
+"devilServerName"
+);
+
+localStorage.removeItem(
+"devilConfigs"
+);
+
+localStorage.removeItem(
+"saveSwitch"
+);
+
+localStorage.removeItem(
+"autoSwitch"
+);
+
+toast(
+"تنظیمات بازنشانی شد"
+);
+
+setTimeout(()=>{
+location.reload();
+},700);
+
 }
 
-function setText(id, value) {
-  const element = document.getElementById(id);
-  if (element) {
-    element.innerText = value == null ? "---" : value;
-  }
-}
-
-function escapeHTML(value) {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
 
 
-/* ================= INIT ================= */
+/* ================= START ================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderServers();
-  renderConfigs();
-  updateAccount();
-  loadSwitches();
-  checkAllPings();
+window.onload=function(){
 
-  const ipInput = document.getElementById("ipInput");
-  if (ipInput) {
-    ipInput.addEventListener("keydown", event => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        checkIP();
-      }
-    });
-  }
+loadConfigs();
 
-  const configInput = document.getElementById("configName");
-  if (configInput) {
-    configInput.addEventListener("keydown", event => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        downloadConfig();
-      }
-    });
-  }
-});
+loadAccount();
+
+
+document.getElementById(
+"currentServer"
+).innerText=
+selectedServer;
+
+};
+
+</script>
+
+</body>
+</html>
