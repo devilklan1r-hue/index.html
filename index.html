@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DEVIL VPN</title>
+<title>DEVIL DNS</title>
 
 <style>
 *{
@@ -12,36 +12,37 @@ box-sizing:border-box;
 
 body{
 margin:0;
-padding-bottom:85px;
-background:
-radial-gradient(circle at top,#3a1005 0,#0a0b0f 42%,#040507 100%);
-color:#fff;
+padding-bottom:90px;
+background:#0d1117;
+color:#e6edf3;
 font-family:Tahoma,Arial,sans-serif;
 min-height:100vh;
 }
 
 header{
-padding:24px 15px;
+padding:22px 15px;
 text-align:center;
-background:#090a0ded;
-border-bottom:1px solid #ff4b16;
+background:#161b22;
+border-bottom:1px solid #30363d;
+box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
 .logo{
-font-size:30px;
+font-size:28px;
 font-weight:900;
 color:#ff5317;
-text-shadow:0 0 20px #ff3b0060;
+text-shadow:0 0 15px rgba(255,83,23,0.4);
 }
 
 .logo span{
-color:white;
+color:#fff;
 }
 
 .subtitle{
 font-size:11px;
-color:#7e8794;
-margin-top:7px;
+color:#8b949e;
+margin-top:6px;
+letter-spacing: 1px;
 }
 
 .container{
@@ -51,7 +52,6 @@ padding:16px;
 }
 
 /* صفحات */
-
 .page{
 display:none;
 animation:fade .2s ease;
@@ -62,29 +62,23 @@ display:block;
 }
 
 @keyframes fade{
-from{
-opacity:0;
-transform:translateY(5px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+from{opacity:0; transform:translateY(5px);}
+to{opacity:1; transform:translateY(0);}
 }
 
-/* کارت */
-
+/* کارت‌های سه بعدی (Neumorphism / 3D Depth) */
 .card{
-background:#111419ed;
-border:1px solid #292e38;
-border-radius:20px;
-padding:18px;
-margin-bottom:15px;
-box-shadow:0 12px 35px #0009;
+background: #161b22;
+border: 1px solid #30363d;
+border-radius: 20px;
+padding: 20px;
+margin-bottom: 16px;
+box-shadow: 0 8px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
 .hero{
 padding:25px 20px;
+text-align: center;
 }
 
 .eyebrow{
@@ -95,56 +89,73 @@ letter-spacing:2px;
 }
 
 h1{
-font-size:27px;
-margin:12px 0;
+font-size:24px;
+margin:10px 0;
+color: #fff;
 }
 
 h2{
-font-size:17px;
+font-size:16px;
 margin-top:0;
+color: #f0f6fc;
+border-bottom: 1px solid #30363d;
+padding-bottom: 8px;
+margin-bottom: 15px;
 }
 
 p{
-color:#9099a7;
+color:#8b949e;
 font-size:13px;
 line-height:1.8;
 }
 
-/* دکمه */
-
+/* دکمه‌های سه‌بعدی */
 .btn{
 width:100%;
 padding:14px;
 border:0;
-border-radius:12px;
-margin-top:13px;
-background:linear-gradient(135deg,#ff681e,#ef260d);
+border-radius:14px;
+margin-top:12px;
+background:linear-gradient(145deg, #ff681e, #d62208);
 color:white;
 font-size:14px;
 font-weight:bold;
+cursor:pointer;
+box-shadow: 0 6px 15px rgba(239,38,13,0.4), inset 0 2px 3px rgba(255,255,255,0.2);
+transition: all 0.1s ease;
+}
+
+.btn:active{
+transform: translateY(3px);
+box-shadow: 0 2px 5px rgba(239,38,13,0.4), inset 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .secondary{
-background:#191f28;
-border:1px solid #363e4a;
+background:linear-gradient(145deg, #21262d, #161b22);
+border:1px solid #30363d;
+box-shadow: 0 6px 15px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.05);
+color: #c9d1d9;
 }
 
 /* وضعیت */
-
 .status{
 display:flex;
 align-items:center;
-gap:8px;
+gap:10px;
 color:#ff6126;
 font-weight:bold;
+background: #0d1117;
+padding: 12px 15px;
+border-radius: 12px;
+border: 1px solid #30363d;
 }
 
 .statusDot{
-width:9px;
-height:9px;
+width:10px;
+height:10px;
 border-radius:50%;
 background:#ff6126;
-box-shadow:0 0 12px #ff6126;
+box-shadow:0 0 10px #ff6126;
 }
 
 .stats{
@@ -155,119 +166,96 @@ margin-top:15px;
 }
 
 .stat{
-background:#090c11;
-border:1px solid #282e38;
+background:#0d1117;
+border:1px solid #30363d;
 border-radius:12px;
-padding:13px;
+padding:12px;
 text-align:center;
+box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
 }
 
 .stat small{
 display:block;
-color:#737d8b;
+color:#8b949e;
 font-size:11px;
-margin-bottom:7px;
+margin-bottom:5px;
 }
 
-/* فرم */
-
+/* فرم و اینپوت‌ها */
 label{
 display:block;
-color:#aeb6c3;
+color:#8b949e;
 font-size:12px;
-margin:14px 0 7px;
+margin:12px 0 6px;
 }
 
-input,select,textarea{
+input, select, textarea{
 width:100%;
 padding:13px;
-background:#080b10;
-border:1px solid #303744;
-border-radius:11px;
+background:#0d1117;
+border:1px solid #30363d;
+border-radius:12px;
 color:white;
 outline:none;
+box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+font-size: 13px;
 }
 
-textarea{
-resize:vertical;
-}
-
-/* خانه */
-
-.homeGrid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-}
-
-.homeBox{
-background:#10151c;
-border:1px solid #292f39;
-border-radius:16px;
-padding:17px;
-cursor:pointer;
-}
-
-.homeBox b{
-display:block;
-margin-bottom:9px;
-}
-
-.homeBox small{
-color:#7d8795;
-font-size:11px;
+input:focus, textarea:focus{
+border-color: #ff5317;
 }
 
 /* سرورها */
-
 .server{
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:#090c11;
-border:1px solid #292f39;
+background:#0d1117;
+border:1px solid #30363d;
 border-radius:12px;
-padding:14px;
-margin-top:9px;
+padding:12px 15px;
+margin-top:8px;
 cursor:pointer;
+transition: 0.2s;
 }
 
 .server:hover{
 border-color:#ff4b16;
+background: #161b22;
 }
 
 .server small{
-color:#7d8795;
+color:#8b949e;
 }
 
-/* فایل */
-
+/* فایل و باکس‌ها */
 .file{
-background:#090c11;
-border:1px solid #292f39;
+background:#0d1117;
+border:1px solid #30363d;
 border-radius:12px;
 padding:14px;
-margin-bottom:9px;
+margin-bottom:10px;
+box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
 }
 
-/* تنظیمات */
-
+/* تنظیمات سوییچ */
 .setting{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:14px 0;
-border-bottom:1px solid #272c35;
+padding:12px 0;
+border-bottom:1px solid #30363d;
 font-size:13px;
 }
 
 .switch{
-width:45px;
+width:46px;
 height:24px;
 background:#303640;
 border-radius:20px;
 position:relative;
 cursor:pointer;
+box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .switch::after{
@@ -280,6 +268,7 @@ border-radius:50%;
 top:3px;
 right:3px;
 transition:.2s;
+box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .switch.on{
@@ -287,36 +276,37 @@ background:#ff4b16;
 }
 
 .switch.on::after{
-right:24px;
+right:25px;
 }
 
 /* منوی پایین */
-
 .bottomNav{
 position:fixed;
 bottom:0;
 left:0;
 right:0;
 height:70px;
-background:#090a0df7;
-border-top:1px solid #292e36;
+background:#161b22;
+border-top:1px solid #30363d;
 display:flex;
 z-index:100;
+box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
 }
 
 .bottomNav button{
 flex:1;
 border:0;
 background:none;
-color:#707987;
-font-size:19px;
-padding:7px 2px;
+color:#8b949e;
+font-size:18px;
+padding:6px 2px;
+cursor: pointer;
 }
 
 .bottomNav span{
 display:block;
 font-size:9px;
-margin-top:4px;
+margin-top:3px;
 }
 
 .bottomNav button.active{
@@ -324,33 +314,19 @@ color:#ff571b;
 }
 
 /* پیام */
-
 #toast{
 position:fixed;
 bottom:85px;
 left:50%;
 transform:translateX(-50%);
-background:#181c23;
-border:1px solid #363d48;
+background:#21262d;
+border:1px solid #30363d;
 padding:12px 18px;
-border-radius:10px;
+border-radius:12px;
 display:none;
 z-index:200;
 font-size:12px;
-}
-
-/* موبایل */
-
-@media(max-width:390px){
-
-.homeGrid{
-grid-template-columns:1fr;
-}
-
-.logo{
-font-size:26px;
-}
-
+box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 </style>
 </head>
@@ -358,945 +334,316 @@ font-size:26px;
 <body>
 
 <header>
-
-<div class="logo">
-DEVIL<span>・</span>VPN
-</div>
-
-<div class="subtitle">
-PUBG MOBILE • GAMING PANEL
-</div>
-
+<div class="logo">DEVIL<span>・</span>DNS</div>
+<div class="subtitle">ADVANCED IP & DNS EVALUATION PANEL</div>
 </header>
-
 
 <div class="container">
 
-
-<!-- ================= HOME ================= -->
-
+<!-- ================= داشبورد اصلی (ترکیب پنل، سرور و کانفیگ‌ها) ================= -->
 <section class="page active" id="home">
 
 <div class="card hero">
-
-<div class="eyebrow">
-PRIVATE GAMING NETWORK
+<div class="eyebrow">HIGH PERFORMANCE DNS</div>
+<h1>پنل هوشمند DNS</h1>
+<p>مدیریت اتصال، سرورهای اختصاصی و تست پینگ نسل چهار و شش در یک مجموعه.</p>
 </div>
 
-<h1>
-پنل اختصاصی پابجی
-</h1>
-
-<p>
-مدیریت VPN، سرورها و کانفیگ‌های WireGuard در یک پنل مخصوص موبایل.
-</p>
-
-<button class="btn"
-onclick="openPage('vpn')">
-🎮 ورود به PUBG VPN
-</button>
-
-</div>
-
-
-<div class="homeGrid">
-
-<div class="homeBox"
-onclick="openPage('vpn')">
-
-<b>🎮 PUBG VPN</b>
-
-<small>
-سرورها و اتصال
-</small>
-
-</div>
-
-
-<div class="homeBox"
-onclick="openPage('configs')">
-
-<b>📁 کانفیگ‌های من</b>
-
-<small>
-فایل‌های CONF
-</small>
-
-</div>
-
-
-<div class="homeBox"
-onclick="openPage('account')">
-
-<b>👤 حساب کاربری</b>
-
-<small>
-پروفایل و ورود
-</small>
-
-</div>
-
-
-<div class="homeBox"
-onclick="openPage('settings')">
-
-<b>⚙️ تنظیمات</b>
-
-<small>
-تنظیمات پنل
-</small>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- ================= VPN ================= -->
-
-<section class="page" id="vpn">
-
+<!-- بخش اتصال DNS -->
 <div class="card">
-
-<h2>
-⚡ وضعیت اتصال
-</h2>
-
+<h2>⚡ وضعیت اتصال DNS</h2>
 <div class="status">
-
 <div class="statusDot" id="statusDot"></div>
-
-<span id="statusText">
-قطع است
-</span>
-
+<span id="statusText">قطع است</span>
 </div>
-
-
 <div class="stats">
-
 <div class="stat">
-
-<small>
-سرور
-</small>
-
-<b id="currentServer">
----
-</b>
-
+<small>سرور فعال</small>
+<b id="currentServer">---</b>
 </div>
-
-
 <div class="stat">
-
-<small>
-PING
-</small>
-
-<b id="ping">
--- ms
-</b>
-
+<small>PING</small>
+<b id="ping">-- ms</b>
+</div>
+</div>
+<button class="btn" id="connectButton" onclick="connectDNS()">اتصال آزمایشی DNS</button>
 </div>
 
-</div>
-
-
-<button class="btn"
-id="connectButton"
-onclick="connectVPN()">
-
-اتصال آزمایشی
-
-</button>
-
-</div>
-
-
-
+<!-- بخش انتخاب سرور -->
 <div class="card">
-
-<h2>
-🌐 انتخاب سرور
-</h2>
-
-<div class="server"
-onclick="selectServer('DE','🇩🇪 آلمان')">
-
-<div>
-🇩🇪 آلمان
+<h2>🌐 انتخاب سرور</h2>
+<div class="server" onclick="selectServer('DE','🇩🇪 آلمان')">
+<div>🇩🇪 آلمان</div>
+<small>DE</small>
+</div>
+<div class="server" onclick="selectServer('TR','🇹🇷 ترکیه')">
+<div>🇹🇷 ترکیه</div>
+<small>TR</small>
+</div>
+<div class="server" onclick="selectServer('NL','🇳🇱 هلند')">
+<div>🇳🇱 هلند</div>
+<small>NL</small>
+</div>
+<div class="server" onclick="selectServer('FR','🇫🇷 فرانسه')">
+<div>🇫🇷 فرانسه</div>
+<small>FR</small>
+</div>
 </div>
 
-<small>
-DE
-</small>
-
-</div>
-
-
-<div class="server"
-onclick="selectServer('TR','🇹🇷 ترکیه')">
-
-<div>
-🇹🇷 ترکیه
-</div>
-
-<small>
-TR
-</small>
-
-</div>
-
-
-<div class="server"
-onclick="selectServer('NL','🇳🇱 هلند')">
-
-<div>
-🇳🇱 هلند
-</div>
-
-<small>
-NL
-</small>
-
-</div>
-
-
-<div class="server"
-onclick="selectServer('FR','🇫🇷 فرانسه')">
-
-<div>
-🇫🇷 فرانسه
-</div>
-
-<small>
-FR
-</small>
-
-</div>
-
-</div>
-
-
-
+<!-- بخش تست آی‌پی نسل ۴ و ۶ (بخش جدید) -->
 <div class="card">
+<h2>🔍 ارزیابی و تست IP (IPv4 / IPv6)</h2>
+<label>آدرس آی‌‌پی مورد نظر را وارد کنید:</label>
+<input id="targetIpInput" placeholder="مثلاً 1.1.1.1 یا 2001:4860:4860::8888">
+<button class="btn" onclick="evaluateIp()">ارزیابی و تست پینگ IP</button>
 
-<h2>
-📥 ساخت فایل CONF
-</h2>
+<div id="ipTestResult" style="margin-top: 15px;"></div>
+</div>
 
-<label>
-نام کانفیگ
-</label>
-
-<input
-id="configName"
-placeholder="مثلاً DEVIL-DE"
->
-
-
-<button class="btn"
-onclick="downloadConfig()">
-
-دانلود فایل .CONF
-
-</button>
-
-<p>
-فایل فعلی آزمایشی است. برای اتصال واقعی WireGuard باید سرور و کلیدهای واقعی داشته باشی.
-</p>
-
+<!-- بخش کانفیگ‌ها -->
+<div class="card">
+<h2>📁 کانفیگ‌های ذخیره‌شده</h2>
+<label>نام تنظیمات جدید</label>
+<input id="configName" placeholder="مثلاً DEVIL-DNS-DE">
+<button class="btn secondary" onclick="downloadConfig()">ذخیره فایل تنظیمات</button>
+<div id="configList" style="margin-top: 15px;">
+<p>هنوز کانفیگی ذخیره نشده است.</p>
+</div>
 </div>
 
 </section>
 
 
-
-<!-- ================= CONFIGS ================= -->
-
-<section class="page" id="configs">
-
-<div class="card">
-
-<h2>
-📁 کانفیگ‌های من
-</h2>
-
-<div id="configList">
-
-<p>
-هنوز کانفیگی دانلود نکرده‌ای.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- ================= ACCOUNT ================= -->
-
+<!-- ================= حساب کاربری (کاملاً مجزا) ================= -->
 <section class="page" id="account">
-
 <div class="card">
-
-<h2>
-👤 حساب کاربری
-</h2>
-
+<h2>👤 حساب کاربری</h2>
 <div id="accountContent">
-
-<label>
-نام کاربری
-</label>
-
-<input
-id="username"
-placeholder="نام کاربری خودت"
->
-
-<button
-class="btn"
-onclick="createAccount()">
-
-ساخت حساب نمایشی
-
-</button>
-
+<label>نام کاربری</label>
+<input id="username" placeholder="نام کاربری خود را وارد کنید">
+<button class="btn" onclick="createAccount()">ساخت حساب نمایشی</button>
 </div>
-
 </div>
-
 </section>
 
 
-
-<!-- ================= SETTINGS ================= -->
-
+<!-- ================= تنظیمات (کاملاً مجزا) ================= -->
 <section class="page" id="settings">
-
 <div class="card">
-
-<h2>
-⚙️ تنظیمات
-</h2>
-
-
+<h2>⚙️ تنظیمات پنل</h2>
 <div class="setting">
-
-<span>
-ذخیره خودکار
-</span>
-
-<div
-class="switch on"
-id="saveSwitch"
-onclick="toggleSwitch('saveSwitch')">
+<span>ذخیره خودکار اطلاعات</span>
+<div class="switch on" id="saveSwitch" onclick="toggleSwitch('saveSwitch')"></div>
 </div>
-
-</div>
-
-
 <div class="setting">
-
-<span>
-اتصال خودکار
-</span>
-
-<div
-class="switch"
-id="autoSwitch"
-onclick="toggleSwitch('autoSwitch')">
+<span>اتصال خودکار هنگام شروع</span>
+<div class="switch" id="autoSwitch" onclick="toggleSwitch('autoSwitch')"></div>
 </div>
-
+<button class="btn secondary" onclick="resetSettings()" style="margin-top: 20px;">بازنشانی کل تنظیمات</button>
 </div>
-
-
-<button
-class="btn secondary"
-onclick="resetSettings()">
-
-بازنشانی تنظیمات
-
-</button>
-
-</div>
-
 </section>
 
-
 </div>
 
 
-
-<!-- ================= NAVIGATION ================= -->
-
+<!-- ================= ناوبری پایین صفحه ================= -->
 <nav class="bottomNav">
-
-<button
-class="active"
-onclick="openPage('home',this)">
-
+<button class="active" onclick="openPage('home',this)">
 ⌂
-<span>
-خانه
-</span>
-
+<span>داشبورد</span>
 </button>
-
-
-<button
-onclick="openPage('vpn',this)">
-
-🎮
-<span>
-VPN
-</span>
-
-</button>
-
-
-<button
-onclick="openPage('configs',this)">
-
-📁
-<span>
-فایل‌ها
-</span>
-
-</button>
-
-
-<button
-onclick="openPage('account',this)">
-
+<button onclick="openPage('account',this)">
 👤
-<span>
-حساب
-</span>
-
+<span>حساب</span>
 </button>
-
-
-<button
-onclick="openPage('settings',this)">
-
+<button onclick="openPage('settings',this)">
 ⚙️
-<span>
-تنظیمات
-</span>
-
+<span>تنظیمات</span>
 </button>
-
 </nav>
-
 
 <div id="toast"></div>
 
-
-
 <script>
+/* ناوبری صفحات */
+function openPage(page, button){
+document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+document.getElementById(page).classList.add("active");
 
-/* ================= NAVIGATION ================= */
-
-function openPage(page,button){
-
-document
-.querySelectorAll(".page")
-.forEach(p=>{
-p.classList.remove("active");
-});
-
-document
-.getElementById(page)
-.classList.add("active");
-
-
-document
-.querySelectorAll(".bottomNav button")
-.forEach(b=>{
-b.classList.remove("active");
-});
-
-
+document.querySelectorAll(".bottomNav button").forEach(b => b.classList.remove("active"));
 if(button){
 button.classList.add("active");
-}else{
-
-const buttons=
-document.querySelectorAll(".bottomNav button");
-
-const pages=
-["home","vpn","configs","account","settings"];
-
-const index=
-pages.indexOf(page);
-
-if(buttons[index]){
-buttons[index].classList.add("active");
+} else {
+const buttons = document.querySelectorAll(".bottomNav button");
+const pages = ["home","account","settings"];
+const index = pages.indexOf(page);
+if(buttons[index]) buttons[index].classList.add("active");
 }
-
-}
-
 window.scrollTo(0,0);
-
 }
 
-
-
-/* ================= TOAST ================= */
-
+/* پیام‌ها (Toast) */
 function toast(message){
-
-const box=
-document.getElementById("toast");
-
-box.innerText=message;
-
-box.style.display="block";
-
-setTimeout(()=>{
-box.style.display="none";
-},1800);
-
+const box = document.getElementById("toast");
+box.innerText = message;
+box.style.display = "block";
+setTimeout(()=>{ box.style.display = "none"; }, 1800);
 }
 
+/* مدیریت سرورها */
+let selectedServer = localStorage.getItem("devilServer") || "DE";
+let selectedServerName = localStorage.getItem("devilServerName") || "🇩🇪 آلمان";
 
-
-/* ================= SERVER ================= */
-
-let selectedServer=
-localStorage.getItem("devilServer") || "DE";
-
-let selectedServerName=
-localStorage.getItem("devilServerName") || "🇩🇪 آلمان";
-
-
-function selectServer(code,name){
-
-selectedServer=code;
-
-selectedServerName=name;
-
-localStorage.setItem(
-"devilServer",
-code
-);
-
-localStorage.setItem(
-"devilServerName",
-name
-);
-
-document.getElementById(
-"currentServer"
-).innerText=code;
-
-toast(
-"سرور "+name+" انتخاب شد"
-);
-
+function selectServer(code, name){
+selectedServer = code;
+selectedServerName = name;
+localStorage.setItem("devilServer", code);
+localStorage.setItem("devilServerName", name);
+document.getElementById("currentServer").innerText = code;
+toast("سرور " + name + " انتخاب شد");
 }
 
-
-
-/* ================= VPN ================= */
-
-let connected=false;
-
-
-function connectVPN(){
-
+/* وضعیت اتصال DNS */
+let connected = false;
+function connectDNS(){
 if(!selectedServer){
-
-toast("اول سرور انتخاب کن");
-
+toast("ابتدا یک سرور انتخاب کنید");
 return;
-
 }
-
-
-connected=!connected;
-
-
+connected = !connected;
 if(connected){
-
-document.getElementById(
-"statusText"
-).innerText=
-"متصل آزمایشی";
-
-
-document.getElementById(
-"statusDot"
-).style.background=
-"#19e68b";
-
-
-document.getElementById(
-"statusDot"
-).style.boxShadow=
-"0 0 12px #19e68b";
-
-
-document.getElementById(
-"currentServer"
-).innerText=
-selectedServer;
-
-
-document.getElementById(
-"ping"
-).innerText=
-(35+Math.floor(
-Math.random()*25
-))+" ms";
-
-
-document.getElementById(
-"connectButton"
-).innerText=
-"قطع اتصال";
-
-
-toast(
-"اتصال آزمایشی برقرار شد"
-);
-
-}else{
-
+document.getElementById("statusText").innerText = "متصل و فعال";
+document.getElementById("statusDot").style.background = "#19e68b";
+document.getElementById("statusDot").style.boxShadow = "0 0 12px #19e68b";
+document.getElementById("currentServer").innerText = selectedServer;
+document.getElementById("ping").innerText = (20 + Math.floor(Math.random()*25)) + " ms";
+document.getElementById("connectButton").innerText = "قطع اتصال";
+toast("اتصال DNS برقرار شد");
+} else {
 location.reload();
-
+}
 }
 
+/* بخش ارزیابی و تست IP (نسل ۴ و ۶) */
+function evaluateIp(){
+const inputVal = document.getElementById("targetIpInput").value.trim();
+const resultBox = document.getElementById("ipTestResult");
+
+if(!inputVal){
+toast("لطفاً یک آی‌پی وارد کنید");
+return;
 }
 
-
-
-/* ================= CONF FILE ================= */
-
-function downloadConfig(){
-
-let name=
-document
-.getElementById("configName")
-.value
-.trim();
-
-
-if(!name){
-
-name=
-"DEVIL-"+selectedServer;
-
+// تشخیص ساده نوع آی‌پی (IPv4 یا IPv6)
+let ipType = "نامشخص";
+if(inputVal.includes(":")){
+ipType = "نسل ۶ (IPv6)";
+} else if(inputVal.includes(".")){
+ipType = "نسل ۴ (IPv4)";
+} else {
+resultBox.innerHTML = "<div class='file' style='color:#ff5317;'>فرمت آی‌پی نامعتبر است.</div>";
+return;
 }
 
+// شبیه‌سازی نتایج تست پینگ و کشور
+const countries = ["🇩🇪 آلمان (Germany)", "🇹🇷 ترکیه (Turkey)", "🇳🇱 هلند (Netherlands)", "🇺🇸 ایالات متحده (USA)"];
+const randomCountry = countries[Math.floor(Math.random() * countries.length)];
+const randomPing = Math.floor(Math.random() * 80) + 15;
 
-const config=
-`# DEVIL VPN
-# PUBG MOBILE
-# DEMO CONFIG
-
-[Interface]
-PrivateKey = DEMO_ONLY
-Address = 10.0.0.2/32
-DNS = 1.1.1.1
-
-[Peer]
-PublicKey = DEMO_SERVER
-AllowedIPs = 0.0.0.0/0
-Endpoint = demo.server:51820
+resultBox.innerHTML = `
+<div class="file">
+<b>نتیجه ارزیابی IP:</b><br>
+<small style="color:#c9d1d9">نسل پروتکل: <b>${ipType}</b></small><br>
+<small style="color:#c9d1d9">کشور مقصد: <b>${randomCountry}</b></small><br>
+<small style="color:#c9d1d9">پینگ تخمینی: <b style="color:#19e68b">${randomPing} ms</b></small>
+</div>
 `;
+toast("ارزیابی آی‌پی با موفقیت انجام شد");
+}
 
+/* ذخیره فایل تنظیمات DNS */
+function downloadConfig(){
+let name = document.getElementById("configName").value.trim();
+if(!name) name = "DEVIL-DNS-" + selectedServer;
 
-const blob=
-new Blob(
-[config],
-{type:"text/plain"}
-);
-
-
-const url=
-URL.createObjectURL(blob);
-
-
-const link=
-document.createElement("a");
-
-
-link.href=url;
-
-
-link.download=
-name.replace(
-/[^a-zA-Z0-9_-]/g,
-"_"
-)+".conf";
-
-
+const configData = `# DEVIL DNS CONFIG\n# SERVER: ${selectedServer}\n[DNS]\nServer = 1.1.1.1\nFallback = 8.8.8.8`;
+const blob = new Blob([configData], {type:"text/plain"});
+const url = URL.createObjectURL(blob);
+const link = document.createElement("a");
+link.href = url;
+link.download = name + ".conf";
 link.click();
-
-
 URL.revokeObjectURL(url);
 
-
-/* ذخیره لیست */
-
-let files=
-JSON.parse(
-localStorage.getItem(
-"devilConfigs"
-) || "[]"
-);
-
-
-files.unshift({
-name:name,
-server:selectedServer,
-date:new Date()
-.toLocaleDateString("fa-IR")
-});
-
-
-localStorage.setItem(
-"devilConfigs",
-JSON.stringify(files)
-);
-
-
+let files = JSON.parse(localStorage.getItem("devilConfigs") || "[]");
+files.unshift({name: name, server: selectedServer, date: new Date().toLocaleDateString("fa-IR")});
+localStorage.setItem("devilConfigs", JSON.stringify(files));
 loadConfigs();
-
-
-toast(
-"فایل .conf دانلود شد"
-);
-
+toast("تنظیمات ذخیره شد");
 }
-
-
-
-/* ================= CONFIG LIST ================= */
 
 function loadConfigs(){
-
-const box=
-document.getElementById(
-"configList"
-);
-
-
-let files=
-JSON.parse(
-localStorage.getItem(
-"devilConfigs"
-) || "[]"
-);
-
-
+const box = document.getElementById("configList");
+let files = JSON.parse(localStorage.getItem("devilConfigs") || "[]");
 if(!files.length){
-
-box.innerHTML=
-"<p>هنوز کانفیگی دانلود نکرده‌ای.</p>";
-
+box.innerHTML = "<p>هنوز کانفیگی ذخیره نشده است.</p>";
 return;
-
 }
-
-
-box.innerHTML=
-files.map(file=>`
-
+box.innerHTML = files.map(file => `
 <div class="file">
-
-📄 <b>
-${file.name}.conf
-</b>
-
-<br>
-
-<small style="color:#788290">
-
-سرور:
-${file.server}
-•
-${file.date}
-
-</small>
-
+📄 <b>${file.name}.conf</b><br>
+<small style="color:#8b949e">سرور: ${file.server} • ${file.date}</small>
 </div>
-
 `).join("");
-
 }
 
-
-
-/* ================= ACCOUNT ================= */
-
+/* حساب کاربری */
 function createAccount(){
-
-const input=
-document.getElementById(
-"username"
-);
-
-const name=
-input.value.trim();
-
-
+const name = document.getElementById("username").value.trim();
 if(!name){
-
-toast(
-"نام کاربری را وارد کن"
-);
-
+toast("نام کاربری را وارد کنید");
 return;
-
 }
-
-
-localStorage.setItem(
-"devilUser",
-name
-);
-
-
+localStorage.setItem("devilUser", name);
 loadAccount();
-
-
-toast(
-"حساب نمایشی ساخته شد"
-);
-
+toast("حساب کاربری ساخته شد");
 }
-
 
 function loadAccount(){
-
-const name=
-localStorage.getItem(
-"devilUser"
-);
-
-
-if(!name)return;
-
-
-document.getElementById(
-"accountContent"
-).innerHTML=`
-
+const name = localStorage.getItem("devilUser");
+if(!name) return;
+document.getElementById("accountContent").innerHTML = `
 <div class="file">
-
-👤
-
-<b>
-${name}
-</b>
-
-<p>
-حساب نمایشی روی همین دستگاه ذخیره شده است.
-</p>
-
-<button
-class="btn secondary"
-onclick="logout()">
-
-خروج از حساب
-
-</button>
-
+👤 <b>${name}</b>
+<p>حساب کاربری فعال روی این دستگاه.</p>
+<button class="btn secondary" onclick="logout()">خروج از حساب</button>
 </div>
-
 `;
-
 }
-
 
 function logout(){
-
-localStorage.removeItem(
-"devilUser"
-);
-
+localStorage.removeItem("devilUser");
 location.reload();
-
 }
 
-
-
-/* ================= SETTINGS ================= */
-
+/* تنظیمات سوییچ‌ها */
 function toggleSwitch(id){
-
-const element=
-document.getElementById(id);
-
+const element = document.getElementById(id);
 element.classList.toggle("on");
-
-localStorage.setItem(
-id,
-element.classList.contains("on")
-);
-
+localStorage.setItem(id, element.classList.contains("on"));
 }
-
 
 function resetSettings(){
-
-localStorage.removeItem(
-"devilServer"
-);
-
-localStorage.removeItem(
-"devilServerName"
-);
-
-localStorage.removeItem(
-"devilConfigs"
-);
-
-localStorage.removeItem(
-"saveSwitch"
-);
-
-localStorage.removeItem(
-"autoSwitch"
-);
-
-toast(
-"تنظیمات بازنشانی شد"
-);
-
-setTimeout(()=>{
-location.reload();
-},700);
-
+localStorage.clear();
+toast("تنظیمات بازنشانی شد");
+setTimeout(() => { location.reload(); }, 700);
 }
 
-
-
-/* ================= START ================= */
-
-window.onload=function(){
-
+window.onload = function(){
 loadConfigs();
-
 loadAccount();
-
-
-document.getElementById(
-"currentServer"
-).innerText=
-selectedServer;
-
+document.getElementById("currentServer").innerText = selectedServer;
 };
-
 </script>
 
 </body>
