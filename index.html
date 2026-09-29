@@ -2,231 +2,355 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DEVIL VPN</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
+padding-bottom:85px;
 background:
-radial-gradient(circle at top,#321000 0,#090b10 42%,#050608 100%);
+radial-gradient(circle at top,#3a1005 0,#0a0b0f 42%,#040507 100%);
 color:#fff;
-font-family:Tahoma,sans-serif;
-min-height:100vh
+font-family:Tahoma,Arial,sans-serif;
+min-height:100vh;
 }
 
 header{
-padding:28px 18px 22px;
+padding:24px 15px;
 text-align:center;
-background:rgba(10,10,12,.85);
-border-bottom:1px solid #ff3b00;
-box-shadow:0 0 25px #ff3b0025
+background:#090a0ded;
+border-bottom:1px solid #ff4b16;
 }
 
 .logo{
-font-size:34px;
-font-weight:bold;
-color:#ff4b00;
-letter-spacing:2px;
-text-shadow:0 0 18px #ff3b0080
+font-size:30px;
+font-weight:900;
+color:#ff5317;
+text-shadow:0 0 20px #ff3b0060;
 }
 
-header p{
-margin:7px 0 0;
-color:#9ca3af;
-font-size:12px
+.logo span{
+color:white;
+}
+
+.subtitle{
+font-size:11px;
+color:#7e8794;
+margin-top:7px;
 }
 
 .container{
-max-width:520px;
+width:min(550px,100%);
 margin:auto;
-padding:16px
+padding:16px;
 }
+
+/* صفحات */
+
+.page{
+display:none;
+animation:fade .2s ease;
+}
+
+.page.active{
+display:block;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(5px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* کارت */
 
 .card{
-background:rgba(17,20,27,.88);
-border:1px solid #292d36;
-border-radius:18px;
+background:#111419ed;
+border:1px solid #292e38;
+border-radius:20px;
 padding:18px;
 margin-bottom:15px;
-box-shadow:0 8px 30px #0008
+box-shadow:0 12px 35px #0009;
 }
 
-.card h3{
-margin-top:0
+.hero{
+padding:25px 20px;
 }
+
+.eyebrow{
+font-size:10px;
+color:#ff5a20;
+font-weight:bold;
+letter-spacing:2px;
+}
+
+h1{
+font-size:27px;
+margin:12px 0;
+}
+
+h2{
+font-size:17px;
+margin-top:0;
+}
+
+p{
+color:#9099a7;
+font-size:13px;
+line-height:1.8;
+}
+
+/* دکمه */
+
+.btn{
+width:100%;
+padding:14px;
+border:0;
+border-radius:12px;
+margin-top:13px;
+background:linear-gradient(135deg,#ff681e,#ef260d);
+color:white;
+font-size:14px;
+font-weight:bold;
+}
+
+.secondary{
+background:#191f28;
+border:1px solid #363e4a;
+}
+
+/* وضعیت */
 
 .status{
-color:#ff4b00;
-font-weight:bold
-}
-
-.info{
 display:flex;
+align-items:center;
 gap:8px;
-margin-top:12px
+color:#ff6126;
+font-weight:bold;
 }
 
-.box{
-flex:1;
+.statusDot{
+width:9px;
+height:9px;
+border-radius:50%;
+background:#ff6126;
+box-shadow:0 0 12px #ff6126;
+}
+
+.stats{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:15px;
+}
+
+.stat{
 background:#090c11;
-border:1px solid #292d36;
+border:1px solid #282e38;
 border-radius:12px;
-padding:12px;
-text-align:center
+padding:13px;
+text-align:center;
 }
 
-.box small{
+.stat small{
 display:block;
-color:#777f8c;
-margin-bottom:5px
+color:#737d8b;
+font-size:11px;
+margin-bottom:7px;
 }
+
+/* فرم */
 
 label{
 display:block;
-margin:14px 0 7px;
 color:#aeb6c3;
-font-size:13px
+font-size:12px;
+margin:14px 0 7px;
 }
 
 input,select,textarea{
 width:100%;
 padding:13px;
-background:#090c11;
-color:white;
-border:1px solid #303641;
-border-radius:10px;
-outline:none
-}
-
-input:focus,select:focus,textarea:focus{
-border-color:#ff4b00
-}
-
-button{
-width:100%;
-padding:14px;
-margin-top:13px;
-border:0;
+background:#080b10;
+border:1px solid #303744;
 border-radius:11px;
-background:linear-gradient(135deg,#ff6500,#ff2600);
 color:white;
-font-size:15px;
-font-weight:bold;
-box-shadow:0 5px 18px #ff3b0030
+outline:none;
 }
 
-button:active{
-transform:scale(.98)
+textarea{
+resize:vertical;
 }
 
-.secondary{
-background:#171c24;
-border:1px solid #343b47;
-box-shadow:none
+/* خانه */
+
+.homeGrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
 }
 
-.danger{
-background:#261013;
-border:1px solid #572027;
-box-shadow:none
+.homeBox{
+background:#10151c;
+border:1px solid #292f39;
+border-radius:16px;
+padding:17px;
+cursor:pointer;
 }
 
-.hidden{
-display:none
+.homeBox b{
+display:block;
+margin-bottom:9px;
 }
 
-.user{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px
+.homeBox small{
+color:#7d8795;
+font-size:11px;
 }
 
-.avatar{
-width:48px;
-height:48px;
-border-radius:50%;
-background:linear-gradient(135deg,#ff6500,#ff2600);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:21px
-}
+/* سرورها */
 
-.userinfo{
-flex:1
-}
-
-.userinfo strong{
-display:block
-}
-
-.userinfo small{
-color:#7e8794
-}
-
-.row{
+.server{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:12px 0;
-border-bottom:1px solid #242932
+background:#090c11;
+border:1px solid #292f39;
+border-radius:12px;
+padding:14px;
+margin-top:9px;
+cursor:pointer;
 }
 
-.row:last-child{
-border-bottom:0
+.server:hover{
+border-color:#ff4b16;
+}
+
+.server small{
+color:#7d8795;
+}
+
+/* فایل */
+
+.file{
+background:#090c11;
+border:1px solid #292f39;
+border-radius:12px;
+padding:14px;
+margin-bottom:9px;
+}
+
+/* تنظیمات */
+
+.setting{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:14px 0;
+border-bottom:1px solid #272c35;
+font-size:13px;
 }
 
 .switch{
-width:46px;
-height:25px;
-background:#333;
+width:45px;
+height:24px;
+background:#303640;
 border-radius:20px;
 position:relative;
-cursor:pointer
+cursor:pointer;
 }
 
-.switch:after{
+.switch::after{
 content:"";
-width:19px;
-height:19px;
+position:absolute;
+width:18px;
+height:18px;
 background:white;
 border-radius:50%;
-position:absolute;
 top:3px;
 right:3px;
-transition:.2s
+transition:.2s;
 }
 
 .switch.on{
-background:#ff4b00
+background:#ff4b16;
 }
 
-.switch.on:after{
-right:24px
+.switch.on::after{
+right:24px;
 }
 
-footer{
-text-align:center;
-color:#606875;
-font-size:11px;
-padding:20px
+/* منوی پایین */
+
+.bottomNav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:70px;
+background:#090a0df7;
+border-top:1px solid #292e36;
+display:flex;
+z-index:100;
 }
+
+.bottomNav button{
+flex:1;
+border:0;
+background:none;
+color:#707987;
+font-size:19px;
+padding:7px 2px;
+}
+
+.bottomNav span{
+display:block;
+font-size:9px;
+margin-top:4px;
+}
+
+.bottomNav button.active{
+color:#ff571b;
+}
+
+/* پیام */
 
 #toast{
 position:fixed;
-bottom:20px;
+bottom:85px;
 left:50%;
 transform:translateX(-50%);
-background:#171a20;
-border:1px solid #343a45;
+background:#181c23;
+border:1px solid #363d48;
 padding:12px 18px;
 border-radius:10px;
 display:none;
-z-index:99
+z-index:200;
+font-size:12px;
+}
+
+/* موبایل */
+
+@media(max-width:390px){
+
+.homeGrid{
+grid-template-columns:1fr;
+}
+
+.logo{
+font-size:26px;
+}
+
 }
 </style>
 </head>
@@ -234,363 +358,942 @@ z-index:99
 <body>
 
 <header>
-<div class="logo">DEVIL VPN</div>
-<p>PUBG MOBILE • WIREGUARD PANEL</p>
+
+<div class="logo">
+DEVIL<span>・</span>VPN
+</div>
+
+<div class="subtitle">
+PUBG MOBILE • GAMING PANEL
+</div>
+
 </header>
 
-<main class="container">
 
-<!-- ACCOUNT -->
-<section class="card" id="accountCard">
+<div class="container">
 
-<div id="loggedOut">
-<h3>👤 حساب کاربری</h3>
-<p style="color:#8d96a3;font-size:13px">
-برای استفاده از پنل، حساب نمایشی خودت را بساز.
+
+<!-- ================= HOME ================= -->
+
+<section class="page active" id="home">
+
+<div class="card hero">
+
+<div class="eyebrow">
+PRIVATE GAMING NETWORK
+</div>
+
+<h1>
+پنل اختصاصی پابجی
+</h1>
+
+<p>
+مدیریت VPN، سرورها و کانفیگ‌های WireGuard در یک پنل مخصوص موبایل.
 </p>
 
-<input id="username" placeholder="نام کاربری">
+<button class="btn"
+onclick="openPage('vpn')">
+🎮 ورود به PUBG VPN
+</button>
 
-<button onclick="login()">ساخت حساب / ورود</button>
 </div>
 
-<div id="loggedIn" class="hidden">
-<div class="user">
-<div class="avatar">👤</div>
 
-<div class="userinfo">
-<strong id="userName"></strong>
-<small>حساب کاربری</small>
+<div class="homeGrid">
+
+<div class="homeBox"
+onclick="openPage('vpn')">
+
+<b>🎮 PUBG VPN</b>
+
+<small>
+سرورها و اتصال
+</small>
+
 </div>
 
-<button class="danger" style="width:auto;margin:0;padding:9px 13px"
-onclick="logout()">خروج</button>
+
+<div class="homeBox"
+onclick="openPage('configs')">
+
+<b>📁 کانفیگ‌های من</b>
+
+<small>
+فایل‌های CONF
+</small>
+
 </div>
+
+
+<div class="homeBox"
+onclick="openPage('account')">
+
+<b>👤 حساب کاربری</b>
+
+<small>
+پروفایل و ورود
+</small>
+
+</div>
+
+
+<div class="homeBox"
+onclick="openPage('settings')">
+
+<b>⚙️ تنظیمات</b>
+
+<small>
+تنظیمات پنل
+</small>
+
+</div>
+
 </div>
 
 </section>
 
-<!-- CONNECTION -->
-<section class="card">
 
-<h3>⚡ وضعیت اتصال</h3>
 
-<p class="status" id="status">
-● قطع است
-</p>
+<!-- ================= VPN ================= -->
 
-<div class="info">
+<section class="page" id="vpn">
 
-<div class="box">
-<small>سرور</small>
-<b id="serverText">---</b>
+<div class="card">
+
+<h2>
+⚡ وضعیت اتصال
+</h2>
+
+<div class="status">
+
+<div class="statusDot" id="statusDot"></div>
+
+<span id="statusText">
+قطع است
+</span>
+
 </div>
 
-<div class="box">
-<small>Ping</small>
-<b id="ping">-- ms</b>
-</div>
+
+<div class="stats">
+
+<div class="stat">
+
+<small>
+سرور
+</small>
+
+<b id="currentServer">
+---
+</b>
 
 </div>
 
-<button onclick="toggleConnection()" id="connectBtn">
+
+<div class="stat">
+
+<small>
+PING
+</small>
+
+<b id="ping">
+-- ms
+</b>
+
+</div>
+
+</div>
+
+
+<button class="btn"
+id="connectButton"
+onclick="connectVPN()">
+
 اتصال آزمایشی
+
 </button>
 
-</section>
-
-<!-- SERVER -->
-<section class="card">
-
-<h3>🌐 انتخاب سرور</h3>
-
-<label>سرور بازی</label>
-
-<select id="server" onchange="saveSettings()">
-<option value="DE">🇩🇪 آلمان</option>
-<option value="TR">🇹🇷 ترکیه</option>
-<option value="NL">🇳🇱 هلند</option>
-<option value="FR">🇫🇷 فرانسه</option>
-</select>
-
-</section>
-
-<!-- CONFIG -->
-<section class="card">
-
-<h3>🛠 ساخت کانفیگ</h3>
-
-<label>نام کانفیگ</label>
-
-<input id="configName" placeholder="مثلاً DEVIL-DE">
-
-<button onclick="createConfig()">
-ساخت کانفیگ نمایشی
-</button>
-
-<p id="result" style="color:#ff8a5b;font-size:13px"></p>
-
-<textarea id="config"
-rows="7"
-placeholder="کانفیگ WireGuard اینجا قرار می‌گیرد"></textarea>
-
-<button class="secondary" onclick="copyConfig()">
-📋 کپی کانفیگ
-</button>
-
-</section>
-
-<!-- SETTINGS -->
-<section class="card">
-
-<h3>⚙️ تنظیمات</h3>
-
-<div class="row">
-<span>ذخیره خودکار تنظیمات</span>
-<div class="switch on" id="saveSwitch"
-onclick="toggleSave()"></div>
 </div>
 
-<div class="row">
-<span>اتصال خودکار</span>
-<div class="switch" id="autoSwitch"
-onclick="toggleAuto()"></div>
+
+
+<div class="card">
+
+<h2>
+🌐 انتخاب سرور
+</h2>
+
+<div class="server"
+onclick="selectServer('DE','🇩🇪 آلمان')">
+
+<div>
+🇩🇪 آلمان
 </div>
 
-<button class="secondary" onclick="resetSettings()">
+<small>
+DE
+</small>
+
+</div>
+
+
+<div class="server"
+onclick="selectServer('TR','🇹🇷 ترکیه')">
+
+<div>
+🇹🇷 ترکیه
+</div>
+
+<small>
+TR
+</small>
+
+</div>
+
+
+<div class="server"
+onclick="selectServer('NL','🇳🇱 هلند')">
+
+<div>
+🇳🇱 هلند
+</div>
+
+<small>
+NL
+</small>
+
+</div>
+
+
+<div class="server"
+onclick="selectServer('FR','🇫🇷 فرانسه')">
+
+<div>
+🇫🇷 فرانسه
+</div>
+
+<small>
+FR
+</small>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+📥 ساخت فایل CONF
+</h2>
+
+<label>
+نام کانفیگ
+</label>
+
+<input
+id="configName"
+placeholder="مثلاً DEVIL-DE"
+>
+
+
+<button class="btn"
+onclick="downloadConfig()">
+
+دانلود فایل .CONF
+
+</button>
+
+<p>
+فایل فعلی آزمایشی است. برای اتصال واقعی WireGuard باید سرور و کلیدهای واقعی داشته باشی.
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= CONFIGS ================= -->
+
+<section class="page" id="configs">
+
+<div class="card">
+
+<h2>
+📁 کانفیگ‌های من
+</h2>
+
+<div id="configList">
+
+<p>
+هنوز کانفیگی دانلود نکرده‌ای.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= ACCOUNT ================= -->
+
+<section class="page" id="account">
+
+<div class="card">
+
+<h2>
+👤 حساب کاربری
+</h2>
+
+<div id="accountContent">
+
+<label>
+نام کاربری
+</label>
+
+<input
+id="username"
+placeholder="نام کاربری خودت"
+>
+
+<button
+class="btn"
+onclick="createAccount()">
+
+ساخت حساب نمایشی
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= SETTINGS ================= -->
+
+<section class="page" id="settings">
+
+<div class="card">
+
+<h2>
+⚙️ تنظیمات
+</h2>
+
+
+<div class="setting">
+
+<span>
+ذخیره خودکار
+</span>
+
+<div
+class="switch on"
+id="saveSwitch"
+onclick="toggleSwitch('saveSwitch')">
+</div>
+
+</div>
+
+
+<div class="setting">
+
+<span>
+اتصال خودکار
+</span>
+
+<div
+class="switch"
+id="autoSwitch"
+onclick="toggleSwitch('autoSwitch')">
+</div>
+
+</div>
+
+
+<button
+class="btn secondary"
+onclick="resetSettings()">
+
 بازنشانی تنظیمات
+
 </button>
+
+</div>
 
 </section>
 
-</main>
 
-<footer>
-DEVIL VPN • DEMO VERSION<br>
-اتصال واقعی WireGuard هنوز فعال نیست
-</footer>
+</div>
+
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav class="bottomNav">
+
+<button
+class="active"
+onclick="openPage('home',this)">
+
+⌂
+<span>
+خانه
+</span>
+
+</button>
+
+
+<button
+onclick="openPage('vpn',this)">
+
+🎮
+<span>
+VPN
+</span>
+
+</button>
+
+
+<button
+onclick="openPage('configs',this)">
+
+📁
+<span>
+فایل‌ها
+</span>
+
+</button>
+
+
+<button
+onclick="openPage('account',this)">
+
+👤
+<span>
+حساب
+</span>
+
+</button>
+
+
+<button
+onclick="openPage('settings',this)">
+
+⚙️
+<span>
+تنظیمات
+</span>
+
+</button>
+
+</nav>
+
 
 <div id="toast"></div>
 
+
+
 <script>
 
-let connected=false;
+/* ================= NAVIGATION ================= */
 
-function toast(text){
-const t=document.getElementById("toast");
-t.innerText=text;
-t.style.display="block";
-setTimeout(()=>t.style.display="none",1800);
-}
+function openPage(page,button){
 
-/* ACCOUNT */
-
-function login(){
-
-const name=document.getElementById("username").value.trim();
-
-if(!name){
-toast("نام کاربری را وارد کن");
-return;
-}
-
-localStorage.setItem("devilUser",name);
-
-showUser();
-
-toast("حساب ساخته شد 🔥");
-}
-
-function showUser(){
-
-const name=localStorage.getItem("devilUser");
-
-if(name){
-
-document.getElementById("loggedOut").classList.add("hidden");
-document.getElementById("loggedIn").classList.remove("hidden");
-
-document.getElementById("userName").innerText=name;
-
-}else{
-
-document.getElementById("loggedOut").classList.remove("hidden");
-document.getElementById("loggedIn").classList.add("hidden");
-
-}
-}
-
-function logout(){
-
-localStorage.removeItem("devilUser");
-
-showUser();
-
-toast("از حساب خارج شدی");
-}
-
-/* CONNECTION */
-
-function toggleConnection(){
-
-if(!localStorage.getItem("devilUser")){
-toast("اول حساب بساز");
-return;
-}
-
-const server=document.getElementById("server");
-const text=server.options[server.selectedIndex].text;
-
-connected=!connected;
-
-if(connected){
-
-document.getElementById("status").innerText="● متصل آزمایشی";
-document.getElementById("status").style.color="#20e68a";
-
-document.getElementById("serverText").innerText=server.value;
-
-document.getElementById("ping").innerText=
-Math.floor(Math.random()*25+35)+" ms";
-
-document.getElementById("connectBtn").innerText="قطع اتصال";
-
-toast("اتصال آزمایشی برقرار شد");
-
-}else{
-
-document.getElementById("status").innerText="● قطع است";
-document.getElementById("status").style.color="#ff4b00";
-
-document.getElementById("serverText").innerText="---";
-document.getElementById("ping").innerText="-- ms";
-
-document.getElementById("connectBtn").innerText="اتصال آزمایشی";
-
-toast("اتصال قطع شد");
-}
-}
-
-/* CONFIG */
-
-function createConfig(){
-
-const name=document.getElementById("configName").value.trim();
-const server=document.getElementById("server").value;
-
-if(!name){
-toast("نام کانفیگ را وارد کن");
-return;
-}
-
-document.getElementById("config").value=
-"# DEVIL VPN DEMO\n"+
-"# Config: "+name+"\n"+
-"# Server: "+server+"\n\n"+
-"[Interface]\n"+
-"PrivateKey = DEMO_ONLY\n"+
-"Address = 10.0.0.2/32\n\n"+
-"[Peer]\n"+
-"PublicKey = DEMO_SERVER\n"+
-"Endpoint = demo.server:51820\n";
-
-document.getElementById("result").innerText=
-"کانفیگ نمایشی برای "+name+" ساخته شد.";
-
-toast("کانفیگ ساخته شد");
-}
-
-/* COPY */
-
-function copyConfig(){
-
-const config=document.getElementById("config");
-
-if(!config.value.trim()){
-toast("اول کانفیگ بساز");
-return;
-}
-
-navigator.clipboard.writeText(config.value)
-.then(()=>toast("کانفیگ کپی شد 📋"))
-.catch(()=>{
-config.select();
-document.execCommand("copy");
-toast("کپی شد");
+document
+.querySelectorAll(".page")
+.forEach(p=>{
+p.classList.remove("active");
 });
+
+document
+.getElementById(page)
+.classList.add("active");
+
+
+document
+.querySelectorAll(".bottomNav button")
+.forEach(b=>{
+b.classList.remove("active");
+});
+
+
+if(button){
+button.classList.add("active");
+}else{
+
+const buttons=
+document.querySelectorAll(".bottomNav button");
+
+const pages=
+["home","vpn","configs","account","settings"];
+
+const index=
+pages.indexOf(page);
+
+if(buttons[index]){
+buttons[index].classList.add("active");
 }
 
-/* SETTINGS */
+}
 
-function saveSettings(){
+window.scrollTo(0,0);
 
-if(localStorage.getItem("autoSave")!=="false"){
+}
+
+
+
+/* ================= TOAST ================= */
+
+function toast(message){
+
+const box=
+document.getElementById("toast");
+
+box.innerText=message;
+
+box.style.display="block";
+
+setTimeout(()=>{
+box.style.display="none";
+},1800);
+
+}
+
+
+
+/* ================= SERVER ================= */
+
+let selectedServer=
+localStorage.getItem("devilServer") || "DE";
+
+let selectedServerName=
+localStorage.getItem("devilServerName") || "🇩🇪 آلمان";
+
+
+function selectServer(code,name){
+
+selectedServer=code;
+
+selectedServerName=name;
 
 localStorage.setItem(
 "devilServer",
-document.getElementById("server").value
+code
 );
-
-}
-}
-
-function toggleSave(){
-
-const sw=document.getElementById("saveSwitch");
-
-sw.classList.toggle("on");
 
 localStorage.setItem(
-"autoSave",
-sw.classList.contains("on")
+"devilServerName",
+name
 );
+
+document.getElementById(
+"currentServer"
+).innerText=code;
+
+toast(
+"سرور "+name+" انتخاب شد"
+);
+
 }
 
-function toggleAuto(){
 
-const sw=document.getElementById("autoSwitch");
 
-sw.classList.toggle("on");
+/* ================= VPN ================= */
+
+let connected=false;
+
+
+function connectVPN(){
+
+if(!selectedServer){
+
+toast("اول سرور انتخاب کن");
+
+return;
+
+}
+
+
+connected=!connected;
+
+
+if(connected){
+
+document.getElementById(
+"statusText"
+).innerText=
+"متصل آزمایشی";
+
+
+document.getElementById(
+"statusDot"
+).style.background=
+"#19e68b";
+
+
+document.getElementById(
+"statusDot"
+).style.boxShadow=
+"0 0 12px #19e68b";
+
+
+document.getElementById(
+"currentServer"
+).innerText=
+selectedServer;
+
+
+document.getElementById(
+"ping"
+).innerText=
+(35+Math.floor(
+Math.random()*25
+))+" ms";
+
+
+document.getElementById(
+"connectButton"
+).innerText=
+"قطع اتصال";
+
+
+toast(
+"اتصال آزمایشی برقرار شد"
+);
+
+}else{
+
+location.reload();
+
+}
+
+}
+
+
+
+/* ================= CONF FILE ================= */
+
+function downloadConfig(){
+
+let name=
+document
+.getElementById("configName")
+.value
+.trim();
+
+
+if(!name){
+
+name=
+"DEVIL-"+selectedServer;
+
+}
+
+
+const config=
+`# DEVIL VPN
+# PUBG MOBILE
+# DEMO CONFIG
+
+[Interface]
+PrivateKey = DEMO_ONLY
+Address = 10.0.0.2/32
+DNS = 1.1.1.1
+
+[Peer]
+PublicKey = DEMO_SERVER
+AllowedIPs = 0.0.0.0/0
+Endpoint = demo.server:51820
+`;
+
+
+const blob=
+new Blob(
+[config],
+{type:"text/plain"}
+);
+
+
+const url=
+URL.createObjectURL(blob);
+
+
+const link=
+document.createElement("a");
+
+
+link.href=url;
+
+
+link.download=
+name.replace(
+/[^a-zA-Z0-9_-]/g,
+"_"
+)+".conf";
+
+
+link.click();
+
+
+URL.revokeObjectURL(url);
+
+
+/* ذخیره لیست */
+
+let files=
+JSON.parse(
+localStorage.getItem(
+"devilConfigs"
+) || "[]"
+);
+
+
+files.unshift({
+name:name,
+server:selectedServer,
+date:new Date()
+.toLocaleDateString("fa-IR")
+});
+
 
 localStorage.setItem(
-"autoConnect",
-sw.classList.contains("on")
+"devilConfigs",
+JSON.stringify(files)
 );
+
+
+loadConfigs();
+
+
+toast(
+"فایل .conf دانلود شد"
+);
+
 }
+
+
+
+/* ================= CONFIG LIST ================= */
+
+function loadConfigs(){
+
+const box=
+document.getElementById(
+"configList"
+);
+
+
+let files=
+JSON.parse(
+localStorage.getItem(
+"devilConfigs"
+) || "[]"
+);
+
+
+if(!files.length){
+
+box.innerHTML=
+"<p>هنوز کانفیگی دانلود نکرده‌ای.</p>";
+
+return;
+
+}
+
+
+box.innerHTML=
+files.map(file=>`
+
+<div class="file">
+
+📄 <b>
+${file.name}.conf
+</b>
+
+<br>
+
+<small style="color:#788290">
+
+سرور:
+${file.server}
+•
+${file.date}
+
+</small>
+
+</div>
+
+`).join("");
+
+}
+
+
+
+/* ================= ACCOUNT ================= */
+
+function createAccount(){
+
+const input=
+document.getElementById(
+"username"
+);
+
+const name=
+input.value.trim();
+
+
+if(!name){
+
+toast(
+"نام کاربری را وارد کن"
+);
+
+return;
+
+}
+
+
+localStorage.setItem(
+"devilUser",
+name
+);
+
+
+loadAccount();
+
+
+toast(
+"حساب نمایشی ساخته شد"
+);
+
+}
+
+
+function loadAccount(){
+
+const name=
+localStorage.getItem(
+"devilUser"
+);
+
+
+if(!name)return;
+
+
+document.getElementById(
+"accountContent"
+).innerHTML=`
+
+<div class="file">
+
+👤
+
+<b>
+${name}
+</b>
+
+<p>
+حساب نمایشی روی همین دستگاه ذخیره شده است.
+</p>
+
+<button
+class="btn secondary"
+onclick="logout()">
+
+خروج از حساب
+
+</button>
+
+</div>
+
+`;
+
+}
+
+
+function logout(){
+
+localStorage.removeItem(
+"devilUser"
+);
+
+location.reload();
+
+}
+
+
+
+/* ================= SETTINGS ================= */
+
+function toggleSwitch(id){
+
+const element=
+document.getElementById(id);
+
+element.classList.toggle("on");
+
+localStorage.setItem(
+id,
+element.classList.contains("on")
+);
+
+}
+
 
 function resetSettings(){
 
-localStorage.removeItem("devilServer");
-localStorage.removeItem("autoSave");
-localStorage.removeItem("autoConnect");
+localStorage.removeItem(
+"devilServer"
+);
 
-document.getElementById("server").value="DE";
+localStorage.removeItem(
+"devilServerName"
+);
 
-document.getElementById("saveSwitch").classList.add("on");
-document.getElementById("autoSwitch").classList.remove("on");
+localStorage.removeItem(
+"devilConfigs"
+);
 
-toast("تنظیمات بازنشانی شد");
+localStorage.removeItem(
+"saveSwitch"
+);
+
+localStorage.removeItem(
+"autoSwitch"
+);
+
+toast(
+"تنظیمات بازنشانی شد"
+);
+
+setTimeout(()=>{
+location.reload();
+},700);
+
 }
 
-/* LOAD */
+
+
+/* ================= START ================= */
 
 window.onload=function(){
 
-showUser();
+loadConfigs();
 
-const savedServer=localStorage.getItem("devilServer");
+loadAccount();
 
-if(savedServer){
-document.getElementById("server").value=savedServer;
-}
 
-if(localStorage.getItem("autoSave")==="false"){
-document.getElementById("saveSwitch").classList.remove("on");
-}
-
-if(localStorage.getItem("autoConnect")==="true"){
-document.getElementById("autoSwitch").classList.add("on");
-}
+document.getElementById(
+"currentServer"
+).innerText=
+selectedServer;
 
 };
 
