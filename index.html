@@ -384,19 +384,19 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 </section>
 
 
-<!-- ================= صفحه ۳: بخش مجزای ساخت کانفیگ ================= -->
+<!-- ================= صفحه ۳: بخش مجزای ساخت کانفیگ با فرمت conf ================= -->
 <section class="page" id="builder">
 <div class="card">
 <h2>🛠️ ساخت و خروجی کانفیگ</h2>
-<p>لینک اشتراک یا تنظیمات اختصاصی خود را مدیریت و خروجی بگیرید.</p>
+<p>لینک اشتراک یا تنظیمات اختصاصی خود را مدیریت و با پسوند conf خروجی بگیرید.</p>
 <label>لینک اشتراک سابسکرایبشن شما:</label>
 <textarea id="subLinkInput" rows="3">https://ir.gholabi.shop:9991/sub/djMsMjA4ODE1LDE3OTA3MTczMTI.PQUeGXxF7foaEOncibQbmlossZnc4f_xnSu0Arzkl18</textarea>
 
 <label>نام سفارشی فایل خروجی:</label>
-<input id="configName" value="DEVIL-CONFIGS-VLESS">
+<input id="configName" value="DEVIL-CONFIGS">
 
 <button class="btn" onclick="saveSubscription()">ذخیره لینک اشتراک</button>
-<button class="btn secondary" onclick="exportSubscriptionFile()">دانلود فایل کانفیگ اشتراک</button>
+<button class="btn secondary" onclick="exportSubscriptionFile()">دانلود فایل کانفیگ (.conf)</button>
 </div>
 </section>
 
@@ -473,7 +473,7 @@ box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 <div id="toast"></div>
 
 <script>
-/* سیستم مدیریت صفجه‌های جداگانه */
+/* سیستم مدیریت صفحه های جداگانه */
 function openPage(page, button){
 document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
 document.getElementById(page).classList.add("active");
@@ -521,7 +521,6 @@ loadDynamicServers();
 /* استخراج و نمایش کشورهای موجود در اشتراک شما */
 function loadDynamicServers(){
 const container = document.getElementById("dynamicServerList");
-// شبیه‌سازی استخراج کشورهای مختلف از لینک اشتراک شما
 const countries = [
 {flag: "🇩🇪", name: "آلمان (Germany)", code: "DE"},
 {flag: "🇫🇷", name: "فرانسه (France)", code: "FR"},
@@ -557,19 +556,22 @@ location.reload();
 }
 }
 
-/* بخش ساخت و دانلود فایل کانفیگ اشتراک */
+/* بخش ساخت و دانلود فایل کانفیگ با پسوند conf */
 function exportSubscriptionFile(){
 const link = document.getElementById("subLinkInput").value.trim();
-const name = document.getElementById("configName").value.trim() || "DEVIL-CONFIG";
+let name = document.getElementById("configName").value.trim() || "DEVIL-CONFIG";
+
+// پاکسازی نام فایل از کاراکترهای غیرمجاز
+name = name.replace(/[^a-zA-Z0-9_-]/g, "_");
 
 const blob = new Blob([link], {type:"text/plain"});
 const url = URL.createObjectURL(blob);
 const linkElem = document.createElement("a");
 linkElem.href = url;
-linkElem.download = name + ".txt";
+linkElem.download = name + ".conf";
 linkElem.click();
 URL.revokeObjectURL(url);
-toast("فایل کانفیگ اشتراک دانلود شد");
+toast("فایل کانفیگ با فرمت .conf دانلود شد");
 }
 
 /* تست واقعی IP / DNS با API زنده */
