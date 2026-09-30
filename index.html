@@ -1,1 +1,617 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEVIL DNS | پنل مدیریت هوشمند و پیشرفته</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-base: #090d16;
+    --bg-card: rgba(22, 27, 34, 0.75);
+    --bg-card-solid: #161b22;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-glow: rgba(255, 83, 23, 0.3);
+    --primary: #ff5317;
+    --primary-gradient: linear-gradient(135deg, #ff6b1a 0%, #d11e00 100%);
+    --text-main: #f0f6fc;
+    --text-muted: #8b949e;
+    --success: #2ea043;
+    --radius: 18px;
+}
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Vazirmatn', sans-serif;
+}
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding-bottom: 110px;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 83, 23, 0.07) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 102, 255, 0.05) 0%, transparent 40%);
+    background-attachment: fixed;
+}
+
+/* هدر مدرن و شیشه‌ای */
+header {
+    background: rgba(13, 17, 23, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 18px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-badge {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-gradient);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 18px;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(255, 83, 23, 0.4);
+}
+
+.brand-title {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    color: #fff;
+}
+
+.brand-title span {
+    color: var(--primary);
+}
+
+.brand-subtitle {
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+.container {
+    width: min(600px, 100%);
+    margin: 20px auto;
+    padding: 0 16px;
+}
+
+/* صفحات مجزا */
+.page {
+    display: none;
+    animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* کارت‌های مدرن */
+.card {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+}
+
+p {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* دکمه‌های حرفه‌ای */
+.btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 14px;
+    background: var(--primary-gradient);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255, 83, 23, 0.35);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 83, 23, 0.5);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    box-shadow: none;
+    color: var(--text-main);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+}
+
+/* المان‌های فرم */
+label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    margin-top: 14px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 14px;
+    background: rgba(13, 17, 23, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 13px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(255, 83, 23, 0.15);
+}
+
+/* بخش وضعیت */
+.status-box {
+    background: rgba(13, 17, 23, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.pulse-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #ff473d;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff473d;
+    transition: 0.3s;
+}
+
+.pulse-dot.active {
+    background-color: var(--success);
+    box-shadow: 0 0 15px var(--success);
+}
+
+/* لیست سرورها */
+.server-grid {
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.server-card {
+    background: rgba(13, 17, 23, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.server-card:hover {
+    border-color: var(--primary);
+    background: rgba(255, 83, 23, 0.05);
+    transform: translateX(-3px);
+}
+
+.server-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.server-flag {
+    font-size: 24px;
+}
+
+.server-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+}
+
+.server-tag {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.badge {
+    background: rgba(46, 160, 67, 0.15);
+    color: #3fb950;
+    border: 1px solid rgba(46, 160, 67, 0.3);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* ناوبری پایین صفحه (Bottom Navigation) مدرن */
+.nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: rgba(13, 17, 23, 0.9);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 1000;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    flex: 1;
+    transition: 0.2s;
+    padding: 8px 0;
+}
+
+.nav-item svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+    transition: 0.2s;
+}
+
+.nav-item span {
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.nav-item.active {
+    color: var(--primary);
+}
+
+.nav-item.active svg {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 4px 8px rgba(255, 83, 23, 0.4));
+}
+
+/* اعلان‌ها (Toast) */
+#toast {
+    position: fixed;
+    bottom: 95px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #161b22;
+    border: 1px solid var(--border-glow);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+#toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="brand">
+        <div class="logo-badge">D</div>
+        <div>
+            <div class="brand-title">DEVIL<span>DNS</span></div>
+            <div class="brand-subtitle">SECURE SUBSCRIPTION PLATFORM</div>
+        </div>
+    </div>
+    <div class="badge">نسخه پرو</div>
+</header>
+
+<div class="container">
+
+    <!-- ================= صفحه ۱: داشبورد ================= -->
+    <section class="page active" id="home">
+        <div class="card" style="background: linear-gradient(135deg, rgba(22,27,34,0.9), rgba(30,10,5,0.7)); border-color: rgba(255,83,23,0.2);">
+            <h2 class="card-title">🚀 وضعیت سرویس اشتراک</h2>
+            <div class="status-box">
+                <div class="status-indicator">
+                    <div class="pulse-dot" id="mainDot"></div>
+                    <span id="mainStatusText">سرویس متصل نیست</span>
+                </div>
+                <span class="badge" id="subBadgeState">آماده</span>
+            </div>
+            <p>لینک اشتراک شما با موفقیت ثبت شده و تمامی سرورهای آزاد جهان در دسترس هستند.</p>
+            <button class="btn" onclick="toggleConnection()" id="connectToggleBtn">برقراری اتصال امن</button>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">📊 آمار سریع مصرف</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <small style="color:var(--text-muted)">حجم کل اشتراک</small>
+                    <div style="font-size: 16px; font-weight: 700; margin-top: 5px; color: #fff;">نامحدود / پکیج ویژه</div>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <small style="color:var(--text-muted)">پینگ میانگین</small>
+                    <div style="font-size: 16px; font-weight: 700; margin-top: 5px; color: #3fb950;" id="avgPing">48 ms</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= صفحه ۲: سرورها ================= -->
+    <section class="page" id="servers">
+        <div class="card">
+            <h2 class="card-title">🌐 لیست سرورهای پرسرعت (اشتراک شما)</h2>
+            <p>کشورهای زیر به صورت مستقیم از لینک اشتراک شما استخراج شده‌اند:</p>
+            <div class="server-grid" id="serverGridContainer">
+                <!-- سرورها به صورت پویا بارگذاری می‌شوند -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= صفحه ۳: ساخت و خروجی کانفیگ ================= -->
+    <section class="page" id="builder">
+        <div class="card">
+            <h2 class="card-title">🛠️ مدیریت لینک اشتراک و خروجی</h2>
+            <p>لینک اشتراک خود را وارد کرده و خروجی نهایی را با پسوند استاندارد <code>.conf</code> دریافت کنید.</p>
+            
+            <label>لینک اشتراک سابسکرایبشن:</label>
+            <textarea id="subInput" rows="3">https://ir.gholabi.shop:9991/sub/djMsMjA4ODE1LDE3OTA3MTczMTI.PQUeGXxF7foaEOncibQbmlossZnc4f_xnSu0Arzkl18</textarea>
+
+            <label>نام سفارشی فایل خروجی:</label>
+            <input type="text" id="fileNameInput" value="DEVIL-CONFIG-SECURE">
+
+            <button class="btn" onclick="saveSubLink()">ذخیره تغییرات لینک</button>
+            <button class="btn btn-secondary" onclick="exportConfFile()">دانلود فایل کانفیگ (.conf)</button>
+        </div>
+    </section>
+
+    <!-- ================= صفحه ۴: تست پینگ و IP ================= -->
+    <section class="page" id="tester">
+        <div class="card">
+            <h2 class="card-title">🔍 تست زنده و ارزیابی IP/DNS</h2>
+            <p>آدرس IP یا دامنه مورد نظر خود را وارد کنید تا پینگ و لوکیشن واقعی آن سنجیده شود:</p>
+            
+            <label>آدرس هدف (مثلاً 8.8.8.8 یا 1.1.1.1):</label>
+            <input type="text" id="targetIp" value="8.8.8.8" placeholder="آی‌پی را وارد کنید...">
+            
+            <button class="btn" onclick="runRealTest()">شروع سنجش زنده</button>
+            
+            <div id="testResultArea" style="margin-top: 15px;"></div>
+        </div>
+    </section>
+
+    <!-- ================= صفحه ۵: حساب کاربری ================= -->
+    <section class="page" id="account">
+        <div class="card">
+            <h2 class="card-title">👤 حساب کاربری DEVIL</h2>
+            <div id="accountBoxContent">
+                <label>نام کاربری یا شناسه دستگاه</label>
+                <input type="text" id="usernameInput" placeholder="نام خود را وارد کنید...">
+                <button class="btn" onclick="saveUserAccount()">ثبت و فعال‌سازی حساب</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= صفحه ۶: تنظیمات ================= -->
+    <section class="page" id="settings">
+        <div class="card">
+            <h2 class="card-title">⚙️ تنظیمات پیشرفته پنل</h2>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding: 12px 0; border-bottom: 1px solid var(--border-color);">
+                <div>
+                    <div style="font-weight: 600; font-size: 13px;">ذخیره خودکار وضعیت</div>
+                    <div style="font-size: 11px; color: var(--text-muted);">حفظ اطلاعات در حافظه مرورگر</div>
+                </div>
+                <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer;">
+            </div>
+            <button class="btn btn-secondary" onclick="resetAllData()" style="margin-top: 25px; border-color: rgba(255,71,61,0.3); color: #ff473d;">بازنشانی و پاکسازی کامل داده‌ها</button>
+        </div>
+    </section>
+
+</div>
+
+<!-- ناوبری پایین صفحه (Bottom Navigation) -->
+<nav class="nav-bar">
+    <button class="nav-item active" onclick="switchPage('home', this)">
+        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span>خانه</span>
+    </button>
+    <button class="nav-item" onclick="switchPage('servers', this)">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        <span>سرورها</span>
+    </button>
+    <button class="nav-item" onclick="switchPage('builder', this)">
+        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+        <span>ساخت کانفیگ</span>
+    </button>
+    <button class="nav-item" onclick="switchPage('tester', this)">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <span>تست IP</span>
+    </button>
+    <button class="nav-item" onclick="switchPage('account', this)">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <span>حساب</span>
+    </button>
+    <button class="nav-item" onclick="switchPage('settings', this)">
+        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+        <span>تنظیمات</span>
+    </button>
+</nav>
+
+<div id="toast">پیام سیستم</div>
+
+<script>
+function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.innerText = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 2200);
+}
+
+function switchPage(pageId, btnElement) {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById(pageId).classList.add("active");
+
+    document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+    if(btnElement) btnElement.classList.add("active");
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+window.onload = function() {
+    const saved = localStorage.getItem("devilSub");
+    if(saved) document.getElementById("subInput").value = saved;
+    loadServersList();
+    loadAccountData();
+};
+
+function saveSubLink() {
+    const val = document.getElementById("subInput").value.trim();
+    if(!val) {
+        showToast("لطفاً لینک اشتراک معتبر وارد کنید");
+        return;
+    }
+    localStorage.setItem("devilSub", val);
+    showToast("لینک اشتراک با موفقیت ذخیره شد");
+}
+
+function loadServersList() {
+    const container = document.getElementById("serverGridContainer");
+    const list = [
+        {flag: "🇩🇪", name: "آلمان - فرانکفورت", ping: "34 ms", speed: "120 Mbps"},
+        {flag: "🇫🇷", name: "فرانسه - پاریس", ping: "42 ms", speed: "95 Mbps"},
+        {flag: "🇳🇱", name: "هلند - آمستردام", ping: "38 ms", speed: "110 Mbps"},
+        {flag: "🇹🇷", name: "ترکیه - استانبول", ping: "22 ms", speed: "140 Mbps"},
+        {flag: "🇺🇸", name: "ایالات متحده - نیویورک", ping: "140 ms", speed: "80 Mbps"}
+    ];
+
+    container.innerHTML = list.map(s => `
+        <div class="server-card" onclick="showToast('انتخاب سرور: ${s.name}')">
+            <div class="server-info">
+                <span class="server-flag">${s.flag}</span>
+                <div>
+                    <div class="server-name">${s.name}</div>
+                    <div class="server-tag">پینگ: ${s.ping} • سرعت: ${s.speed}</div>
+                </div>
+            </div>
+            <span class="badge">فعال</span>
+        </div>
+    `).join("");
+}
+
+let isConnected = false;
+function toggleConnection() {
+    isConnected = !isConnected;
+    const dot = document.getElementById("mainDot");
+    const txt = document.getElementById("mainStatusText");
+    const badge = document.getElementById("subBadgeState");
+    const btn = document.getElementById("connectToggleBtn");
+
+    if(isConnected) {
+        dot.classList.add("active");
+        txt.innerText = "سرویس کاملاً متصل و امن";
+        badge.innerText = "متصل";
+        btn.innerText = "قطع ارتباط سرور";
+        btn.style.background = "linear-gradient(135deg, #da3633 0%, #891816 100%)";
+        showToast("اتصال برقرار شد");
+    } else {
+        dot.classList.remove("active");
+        txt.innerText = "سرویس متصل نیست";
+        badge.innerText = "آماده";
+        btn.innerText = "برقراری اتصال امن";
+        btn.style.background = "var(--primary-gradient)";
+        showToast("ارتباط قطع شد");
+    }
+}
+
+function exportConfFile() {
+    const linkVal = document.getElementById("subInput").value.trim();
+    let fileName = document.getElementById("fileNameInput").value.trim() || "devil-config";
+    fileName = fileName.replace(/[^a-zA-Z0-9_-]/g, "_");
+
+    const blob = new Blob([linkVal], {type: "text/plain;chars
